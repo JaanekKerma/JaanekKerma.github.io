@@ -8,7 +8,7 @@ const [mainFeature, ...secondaryFeatures] = featuredProjects;
 const moreProjectCount = projects.length - featuredProjects.length;
 ---
 <SiteLayout title="Jaanek Kerma — Game & Software Developer" description="Portfolio of Jaanek Kerma, a C# developer creating game systems, interactive experiences, and practical software.">
-  <section class="hero shell" aria-labelledby="hero-title">
+  <section id="intro" class="hero shell" aria-labelledby="hero-title">
     <div class="hero-left">
       <div class="eyebrow"><span class="eyebrow-line"></span> C# DEVELOPER / GAME SYSTEMS / SOFTWARE</div>
       <h1 id="hero-title">Building systems.<br /><span class="headline-outline">Making them</span> <span class="headline-accent">playable.</span></h1>
@@ -79,7 +79,7 @@ const moreProjectCount = projects.length - featuredProjects.length;
     </div>
   </section>
 
-  <section class="contact-zone" aria-labelledby="contact-title">
+  <section id="connect" class="contact-zone" aria-labelledby="contact-title">
     <div class="shell contact-inner">
       <div><div class="section-eyebrow">04 / LET'S CONNECT</div><h2 id="contact-title">Have a problem<br />worth <em>solving?</em></h2></div>
       <div class="contact-action"><p>I'm interested in programming roles across games, software, and testing. I'd love to hear about what you're building.</p><a class="button button-dark" href={sitePath("contact/")}>Let’s talk <span aria-hidden="true">↗</span></a></div>

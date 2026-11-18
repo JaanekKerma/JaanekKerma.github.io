@@ -622,3 +622,98 @@ p { line-height: 1.72; }
   .contact-field-row { grid-template-columns: 1fr; }
   .contact-page-bottom { padding-bottom: 80px; }
 }
+
+/* STICKY HEADER / keeps the Menu control in view across the entire page. */
+body { overflow-x: clip; }
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(27, 39, 50, .97);
+  border-bottom-color: var(--line-strong);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 6px 24px rgba(8, 14, 20, .14);
+}
+html { scroll-padding-top: 125px; }
+#intro, #work, #expertise, #about, #connect { scroll-margin-top: 125px; }
+
+/* Collapsible drawer navigation: the chevron button is independent of its link. */
+.drawer-nav-branch { border-bottom: 1px solid var(--line); }
+.drawer-branch-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.drawer-branch-header .drawer-primary-link {
+  flex: 1;
+  min-width: 0;
+  border-bottom: 0;
+}
+.drawer-submenu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  background: rgba(185,236,145,.06);
+  border: 1px solid var(--line-strong);
+  color: var(--lime);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+.drawer-submenu-toggle:hover, .drawer-submenu-toggle[aria-expanded="true"] {
+  background: rgba(185,236,145,.13);
+  border-color: var(--lime);
+}
+.drawer-chevron {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .2s ease;
+}
+.drawer-submenu-toggle[aria-expanded="true"] .drawer-chevron { transform: rotate(45deg); }
+.drawer-submenu {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  padding: 4px 0 18px 25px;
+  margin: 0 0 0 21px;
+  border-left: 1px solid rgba(185,236,145,.24);
+}
+.drawer-submenu a {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 9px 10px 9px 16px;
+  color: #d5dfe6;
+  font-size: .9rem;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: background .18s ease, color .18s ease;
+}
+.drawer-submenu a:hover, .drawer-submenu a:focus-visible {
+  color: var(--lime);
+  background: rgba(185,236,145,.07);
+}
+.drawer-submenu .drawer-project-index { font-size: .63rem; flex: 0 0 20px; }
+.drawer-submenu .drawer-project-arrow { margin-left: auto; }
+.drawer-standalone-link {
+  margin-left: 55px;
+  font-size: clamp(1.3rem, 2.3vw, 1.7rem);
+}
+@media (max-width: 680px) {
+  html { scroll-padding-top: 110px; }
+  #intro, #work, #expertise, #about, #connect { scroll-margin-top: 110px; }
+  .drawer-branch-header { gap: 10px; }
+  .drawer-submenu-toggle { width: 39px; height: 39px; flex-basis: 39px; }
+  .drawer-submenu { margin-left: 19px; padding-left: 17px; }
+  .drawer-standalone-link { margin-left: 49px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .drawer-chevron { transition: none; }
+}

@@ -77,6 +77,22 @@ if (!contact.includes('name="message"') || !contact.includes('name="email"') || 
   broken.push('Contact form missing delivery endpoint or fields');
 }
 if (!contact.includes('076 212 69 22')) broken.push('Contact phone number missing');
+// Drawer navigation must have two independent collapsed sections on every page.
+for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
+  const html = readFileSync(filename, 'utf8');
+  for (const id of ['drawer-home-sections', 'drawer-project-pages']) {
+    if (!html.includes('aria-controls="' + id + '"')) {
+      broken.push(`${relative(root, filename)}: missing submenu toggle for ${id}`);
+    }
+    if (!new RegExp('id="' + id + '"[^>]*\\bhidden').test(html)) {
+      broken.push(`${relative(root, filename)}: submenu must start collapsed: ${id}`);
+    }
+  }
+}
+const siteStyles = allFiles(root).filter((f) => f.endsWith('.css')).map((f) => readFileSync(f, 'utf8')).join('\n');
+if (!/\.site-header\s*\{[^}]*position:\s*sticky/s.test(siteStyles)) {
+  broken.push('Menu header must remain sticky while scrolling');
+}
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }

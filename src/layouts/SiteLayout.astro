@@ -63,23 +63,58 @@ const isPreview = import.meta.env.BASE_URL.includes('/preview/');
           <button class="drawer-close" type="button" data-drawer-close aria-label="Close navigation menu"><span aria-hidden="true">×</span> Close</button>
         </div>
         <nav class="drawer-navigation" aria-label="Expanded navigation">
-          <div class="drawer-group-label">01 / EXPLORE</div>
-          <a class="drawer-primary-link" href={sitePath("")} aria-current={onHome ? 'page' : undefined}><span>Homepage</span><span aria-hidden="true">↗</span></a>
-          <a class="drawer-primary-link" href={sitePath("#work")}><span>Featured projects</span><span aria-hidden="true">↗</span></a>
-          <a class="drawer-primary-link" href={sitePath("#expertise")}><span>Expertise</span><span aria-hidden="true">↗</span></a>
-          <a class="drawer-primary-link" href={sitePath("#about")}><span>About</span><span aria-hidden="true">↗</span></a>
-          <a class="drawer-primary-link" href={sitePath("projects/")} aria-current={onProjects ? 'page' : undefined}><span>All projects</span><span aria-hidden="true">↗</span></a>
-          <a class="drawer-primary-link" href={sitePath("contact/")} aria-current={onContact ? 'page' : undefined}><span>Let's talk / Contact</span><span aria-hidden="true">↗</span></a>
-          <div class="drawer-group-label drawer-project-label">02 / PROJECT INDEX</div>
-          <div class="drawer-project-list">
-            {projects.map((project, index) => (
-              <a href={sitePath("projects/" + project.slug + "/")}>
-                <span class="drawer-project-index">{String(index + 1).padStart(2, "0")}</span>
-                <span>{project.title}</span>
-                <span class="drawer-project-arrow" aria-hidden="true">↗</span>
+          <div class="drawer-group-label">EXPLORE / PORTFOLIO</div>
+          <div class="drawer-nav-branch">
+            <div class="drawer-branch-header">
+              <button
+                type="button"
+                class="drawer-submenu-toggle"
+                data-submenu-toggle
+                data-submenu-label="Homepage sections"
+                aria-controls="drawer-home-sections"
+                aria-expanded="false"
+                aria-label="Expand Homepage sections"
+              ><span class="drawer-chevron" aria-hidden="true"></span></button>
+              <a class="drawer-primary-link" href={sitePath("")} aria-current={onHome ? 'page' : undefined}>
+                <span>Homepage</span><span aria-hidden="true">↗</span>
               </a>
-            ))}
+            </div>
+            <div id="drawer-home-sections" class="drawer-submenu" role="group" aria-label="Homepage sections" hidden>
+              <a href={sitePath("#intro")}>Introduction</a>
+              <a href={sitePath("#work")}>Featured projects</a>
+              <a href={sitePath("#expertise")}>Expertise</a>
+              <a href={sitePath("#about")}>About</a>
+              <a href={sitePath("#connect")}>Let's connect</a>
+            </div>
           </div>
+          <div class="drawer-nav-branch">
+            <div class="drawer-branch-header">
+              <button
+                type="button"
+                class="drawer-submenu-toggle"
+                data-submenu-toggle
+                data-submenu-label="Project pages"
+                aria-controls="drawer-project-pages"
+                aria-expanded="false"
+                aria-label="Expand Project pages"
+              ><span class="drawer-chevron" aria-hidden="true"></span></button>
+              <a class="drawer-primary-link" href={sitePath("projects/")} aria-current={onProjects ? 'page' : undefined}>
+                <span>All projects</span><span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div id="drawer-project-pages" class="drawer-submenu drawer-project-list" role="group" aria-label="Individual projects" hidden>
+              {projects.map((project, index) => (
+                <a href={sitePath("projects/" + project.slug + "/")}>
+                  <span class="drawer-project-index">{String(index + 1).padStart(2, "0")}</span>
+                  <span>{project.title}</span>
+                  <span class="drawer-project-arrow" aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+          <a class="drawer-primary-link drawer-standalone-link" href={sitePath("contact/")} aria-current={onContact ? 'page' : undefined}>
+            <span>Let's talk / Contact</span><span aria-hidden="true">↗</span>
+          </a>
         </nav>
         <div class="drawer-foot">
           <span>GAMES, SYSTEMS & SOFTWARE</span>
@@ -105,11 +140,30 @@ const isPreview = import.meta.env.BASE_URL.includes('/preview/');
       const drawer = document.querySelector<HTMLElement>('[data-site-drawer]');
       const panel = document.querySelector<HTMLElement>('[data-drawer-panel]');
       let previousFocus: HTMLElement | null = null;
-      const focusableItems = () => panel ? Array.from(panel.querySelectorAll<HTMLElement>('a[href],button:not([disabled]):not([tabindex="-1"])')) : [];
+      const focusableItems = () => panel
+        ? Array.from(panel.querySelectorAll<HTMLElement>('a[href],button:not([disabled]):not([tabindex="-1"])'))
+            .filter((element) => element.getClientRects().length > 0)
+        : [];
+
+      const submenuToggles = Array.from(panel?.querySelectorAll<HTMLButtonElement>('[data-submenu-toggle]') ?? []);
+      const setSubmenuOpen = (button: HTMLButtonElement, open: boolean) => {
+        const id = button.getAttribute('aria-controls');
+        const content = id ? document.getElementById(id) : null;
+        if (!content) return;
+        content.hidden = !open;
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', (open ? 'Collapse ' : 'Expand ') + (button.dataset.submenuLabel ?? 'submenu'));
+      };
+      submenuToggles.forEach((button) => {
+        button.addEventListener('click', () => {
+          setSubmenuOpen(button, button.getAttribute('aria-expanded') !== 'true');
+        });
+      });
 
       const closeDrawer = () => {
         if (!drawer || drawer.hidden) return;
         drawer.hidden = true;
+        submenuToggles.forEach((button) => setSubmenuOpen(button, false));
         document.body.classList.remove('drawer-is-open');
         menuButton?.setAttribute('aria-expanded', 'false');
         menuButton?.setAttribute('aria-label', 'Open navigation menu');
