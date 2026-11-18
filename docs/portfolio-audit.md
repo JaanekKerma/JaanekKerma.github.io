@@ -112,3 +112,10 @@ Review [design-directions.md](./design-directions.md), choose the preferred aest
 On 2026-11-18, the authenticated Wix connection returned the complete `MyProjects` CMS collection (4 records), original role statements, team sizes, original project copy, cover media, and eight gallery entries with captions. Astro uses these original descriptive fields as source data and displays the public Wix image URLs. Original binary media files should be copied into the GitHub repo in a subsequent archival pass to remove the external Wix dependency. Source site is unchanged.
 
 Confirmed Wix team sizes: Takstrid 2, Site Zero 9, Tic Tac Toe 1, Grim Farmlore 3. This supersedes the previous unverified team sizes.
+
+
+## Binary asset archive completed
+
+All twelve Wix CMS media references (four project covers and eight project-gallery entries) have been archived as actual files under `public/media/` on `develop`. Astro uses base-aware URLs resolving to these local files, not the Wix CDN. The large animated gameplay media was transferred through a one-time GitHub Actions import job. The source Wix site has not been modified. The project-detail pages now render the original Wix concept, idea, personal role copy, team sizes and individual gallery captions.
+
+Note that Takstrid's Wix cover is a decorative Matrix-style GIF, **not a gameplay screenshot**; its concept is primarily auditory. Site Zero's gameplay GIF is large (~25 MB), so an optimized web-video derivative is recommended before production launch.

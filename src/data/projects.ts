@@ -82,7 +82,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'site-zero',
-    coverImage: "https://static.wixstatic.com/media/2e665a_4b69814683fc4498b8a9650f7e1ed24f~mv2.png",
+    coverImage: "media/site-zero/cover.png",
     coverAlt: "Site Zero original Wix portfolio cover artwork",
     teamSize: 9,
     wixOriginal: {
@@ -96,13 +96,13 @@ export const projects: Project[] = [
       {
         "title": "Gameplay",
         "description": "Each round resets the playing field. There’s no long-term power gain between matches, which means every fight is decided by how well you adapt in the moment. The game loop balances PvP and PvE, with players choosing whether to hunt safer drones on the outskirts or dive into riskier central fights for bigger rewards.",
-        "url": "https://static.wixstatic.com/media/2e665a_991403d178804341bbc43d77d5799444~mv2.gif",
+        "url": "media/site-zero/gameplay.gif",
         "alt": "Gameplay"
       },
       {
         "title": "Site Zero Area",
         "description": "Matches take place inside a partially-built industrial site, filled with vertical spaces, tight corridors, and open arenas. It’s a place built for creative movement, smart positioning, and calculated risk-taking. ",
-        "url": "https://static.wixstatic.com/media/2e665a_27ffd01cfb464ce7bfe3ce2095c4b636~mv2.avif",
+        "url": "media/site-zero/arena.avif",
         "alt": "Site Zero Area"
       }
     ],
@@ -133,7 +133,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'takstrid',
-    coverImage: "https://static.wixstatic.com/media/2e665a_e27f9708d3a64ecd8d03e0a52a3ad750~mv2.gif",
+    coverImage: "media/takstrid/cover.gif",
     coverAlt: "Takstrid original Wix portfolio cover artwork",
     teamSize: 2,
     wixOriginal: {
@@ -188,7 +188,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'grim-farmlore',
-    coverImage: "https://static.wixstatic.com/media/2e665a_fbc1e144cf3640fbb2db9c3b0693bc16~mv2.png",
+    coverImage: "media/grim-farmlore/cover.png",
     coverAlt: "Grim Farmlore original Wix portfolio cover artwork",
     teamSize: 3,
     wixOriginal: {
@@ -202,25 +202,25 @@ export const projects: Project[] = [
       {
         "title": "Main Menu Implementation",
         "description": "This animated main menu was fully designed and programmed by me. I handled everything from layout and button functionality to visual transitions, sound effects, and localization integration, ensuring a smooth and responsive user experience that fits the game’s dark fantasy atmosphere.",
-        "url": "https://static.wixstatic.com/media/2e665a_7e530a930b99492096b32535318dbe5b~mv2.gif",
+        "url": "media/grim-farmlore/main-menu.gif",
         "alt": "Main Menu Implementation"
       },
       {
         "title": "Settings Panel Development",
         "description": "I designed and programmed the game’s settings panel, including audio sliders, graphics quality control, and language selection with localization support. The system was built in Unity using custom scripts to ensure all settings persist and apply correctly across sessions, enhancing user accessibility and gameplay experience.",
-        "url": "https://static.wixstatic.com/media/2e665a_008c40420f6f47e8809c4e19d39ffd98~mv2.png",
+        "url": "media/grim-farmlore/settings.png",
         "alt": "Settings Panel Development"
       },
       {
         "title": "Dialogue System with Ink Integration",
         "description": "I implemented a branching dialogue system using the Ink narrative scripting language and integrated it into Unity. This system supports dynamic conversations, player choices, and real-time updates to the game state, enabling immersive storytelling and flexible narrative design.",
-        "url": "https://static.wixstatic.com/media/2e665a_16f94394a8cf4d42aef13f65e60339c1~mv2.png",
+        "url": "media/grim-farmlore/dialogue.png",
         "alt": "Dialogue System with Ink Integration"
       },
       {
         "title": "Randomized Spawning System",
         "description": "I developed a flexible spawning system in Unity that dynamically populates areas with randomized enemies and objects. The system accounts for spawn bounds, movement parameters, combat stats, and spawn frequency—allowing for varied encounters and procedural gameplay without manual placement.",
-        "url": "https://static.wixstatic.com/media/2e665a_aa92f46629234fd28885ece36c20bfaa~mv2.png",
+        "url": "media/grim-farmlore/spawning.png",
         "alt": "Randomized Spawning System"
       }
     ],
@@ -268,7 +268,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'tic-tac-toe',
-    coverImage: "https://static.wixstatic.com/media/2e665a_6bd7a3505ee1498f8220b155cfae9378~mv2.gif",
+    coverImage: "media/tic-tac-toe/cover.gif",
     coverAlt: "Tic Tac Toe original Wix portfolio cover artwork",
     teamSize: 1,
     wixOriginal: {
@@ -282,13 +282,13 @@ export const projects: Project[] = [
       {
         "title": "UI Animation & Game Logic Integration in Unity",
         "description": "This screenshot showcases my implementation of animated UI transitions using Unity’s Animator and Timeline systems. I programmed custom game state logic to control panel visibility (e.g., Game Over, Restart, Choose a Side) and tied animations to these transitions via code. I structured the UI hierarchy and animations programmatically to ensure smooth, responsive user feedback throughout gameplay.",
-        "url": "https://static.wixstatic.com/media/2e665a_be27748f4cae4052b590ff007dfaa92c~mv2.jpg",
+        "url": "media/tic-tac-toe/ui-animation.jpg",
         "alt": "UI Animation & Game Logic Integration in Unity"
       },
       {
         "title": "Main Menu Screen – UI Setup & Player Selection",
         "description": "This image shows the main menu screen where players select their side. I implemented the UI logic and transitions using Unity’s Animator system, and scripted the interaction to connect player choice with game state initialization. The visual layout and functionality were fully designed and programmed by me to support a cohesive user experience within the space-themed interface.",
-        "url": "https://static.wixstatic.com/media/2e665a_6d2f732bb84e4bbf8710abdfa5c96a75~mv2.png",
+        "url": "media/tic-tac-toe/main-menu.png",
         "alt": "Main Menu Screen – UI Setup & Player Selection"
       }
     ],

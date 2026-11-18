@@ -38,14 +38,14 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
         <div class="detail-right-marker" aria-hidden="true">PROJECT<br />DETAILS <span>↗</span></div>
       </div>
       <div class="detail-visual">
-        {project.coverImage ? <img class="detail-hero-image" src={project.coverImage} alt={project.coverAlt ?? project.title} decoding="async" /> : <ProjectVisual variant={project.visual} large />}
+        {project.coverImage ? <img class="detail-hero-image" src={sitePath(project.coverImage)} alt={project.coverAlt ?? project.title} decoding="async" /> : <ProjectVisual variant={project.visual} large />}
         <div class="detail-image-caption"><span>{project.coverImage ? 'ORIGINAL WIX PORTFOLIO MEDIA' : 'ILLUSTRATIVE VISUAL STUDY'}</span><span>{project.category === 'game' ? 'GAME DEVELOPMENT' : 'SOFTWARE ENGINEERING'}</span></div>
       </div>
     </header>
 
     <section class="detail-meta-strip">
       <div class="shell detail-meta-grid">
-        <div><span>MY ROLE / PROJECT TYPE</span><strong>{project.role}</strong></div>
+        <div><span>MY ROLE / PROJECT TYPE</span><strong>{project.role}</strong>{project.teamSize && <small>{project.teamSize === 1 ? 'Solo project' : `Team of ${project.teamSize}`}</small>}</div>
         <div><span>CONTEXT</span><strong>{project.timeframe}</strong></div>
         <div><span>PRIMARY TOOLS</span><strong>{project.stack.slice(0, 3).join(' · ')}</strong></div>
       </div>
@@ -75,6 +75,31 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
             ))}
           </div>
         </section>
+        {project.wixOriginal && (
+          <section class="detail-section">
+            <span class="section-eyebrow">SOURCE MATERIAL / ORIGINAL PORTFOLIO</span>
+            <h2>Project background.</h2>
+            {project.wixOriginal.subtitle && <p class="original-project-subtitle">{project.wixOriginal.subtitle}</p>}
+            {project.wixOriginal.concept && (
+              <div class="original-project-text">
+                <h3>Concept</h3>
+                <p>{project.wixOriginal.concept}</p>
+              </div>
+            )}
+            {project.wixOriginal.idea && (
+              <div class="original-project-text">
+                <h3>The idea</h3>
+                <p>{project.wixOriginal.idea}</p>
+              </div>
+            )}
+            {project.wixOriginal.myRole && (
+              <div class="original-project-text">
+                <h3>My role</h3>
+                <p>{project.wixOriginal.myRole}</p>
+              </div>
+            )}
+          </section>
+        )}
         {project.gallery && project.gallery.length > 0 && (
           <section class="detail-section project-gallery-section">
             <span class="section-eyebrow">04 / ORIGINAL PROJECT MEDIA</span>
@@ -83,8 +108,8 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
             <div class="case-gallery">
               {project.gallery.map((image) => (
                 <figure class="case-gallery-item">
-                  <a href={image.url} target="_blank" rel="noopener noreferrer" aria-label={'Open full image: ' + image.title}>
-                    <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
+                  <a href={sitePath(image.url)} target="_blank" rel="noopener noreferrer" aria-label={'Open full image: ' + image.title}>
+                    <img src={sitePath(image.url)} alt={image.alt} loading="lazy" decoding="async" />
                   </a>
                   <figcaption>
                     <strong>{image.title}</strong>

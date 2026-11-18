@@ -405,3 +405,10 @@ p { line-height: 1.72; }
   .project-card--prominent .project-image { min-height: 240px; height: auto; aspect-ratio: 1.5; }
   .case-gallery-item figcaption { padding: 18px; }
 }
+
+/* Authenticated Wix CMS project copy, with original formatting preserved. */
+.original-project-subtitle { font-family: var(--mono); font-size: .87rem; color: var(--lime); margin-top: -6px; }
+.original-project-text { margin-top: 30px; }
+.original-project-text h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.original-project-text p { color: var(--muted); white-space: pre-line; line-height: 1.82; }
+.detail-meta-grid small { color: var(--muted-dark); font-size: .78rem; display: block; padding-top: 4px; }

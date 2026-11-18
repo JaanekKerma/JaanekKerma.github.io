@@ -72,3 +72,10 @@ Next: replace illustrative visuals with actual approved project media and contin
 - The two new visuals are abstract/illustrative, **not** original gameplay screenshots.
 - Migrating original Wix screenshots and any additional detailed copy remains to be done; do not represent the current version as a complete asset transfer.
 - Employer work remains excluded.
+
+## Authenticated Wix content and media import
+
+- The Wix connector exposed all four original `MyProjects` records and their gallery and hero images.
+- All twelve media files are now stored locally in `public/media/` and displayed on the site.
+- Original `concept`, `idea`, `myRole`, team size and individual gallery captions are preserved on project pages.
+- Remaining polish: video transcode for Site Zero's ~25MB animated GIF, layout quality control, licensing/attribution review of decorative media.
