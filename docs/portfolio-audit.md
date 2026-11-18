@@ -47,9 +47,9 @@ Repository contents were checked, but inclusion is **not yet approved**. Project
 
 | Candidate | Source | Evidence/next step | Suggested role |
 | --- | --- | --- | --- |
-| Fortune's Gate | [UnityGameJam2026](https://github.com/Ruscemp/UnityGameJam2026) | Unity project structure, docs, and assets exist; confirm final itch.io URL and screenshots | Likely flagship game-programming case study |
-| Timetable app | [TimeTableV2](https://github.com/Ruscemp/TimeTableV2) | Java project structure exists; inspect actual features and project maturity | Supporting software project if strong enough |
-| Incremental game | [IncrementalGame](https://github.com/Ruscemp/IncrementalGame) | Unity project structure exists; evaluate completeness | Optional game project |
+| Fortune's Gate | Source code not publicly accessible — no repository link | Unity project structure, docs, and assets exist; confirm final itch.io URL and screenshots | Likely flagship game-programming case study |
+| Timetable app | Source code not publicly accessible — no repository link | Java project structure exists; inspect actual features and project maturity | Supporting software project if strong enough |
+| Incremental game | Source code not publicly accessible — no repository link | Unity project structure exists; evaluate completeness | Optional game project |
 | Roguelike | [Roguelike-game](https://github.com/Ruscemp/Roguelike-game) | C# source files exist; assess readiness and architecture | Optional programming exercise |
 | Unreal graphics | [Unreal3DRendering](https://github.com/Ruscemp/Unreal3DRendering) | Unreal project directory exists; assess work and permissions | Optional technical showcase |
 
@@ -119,3 +119,7 @@ Confirmed Wix team sizes: Takstrid 2, Site Zero 9, Tic Tac Toe 1, Grim Farmlore 
 All twelve Wix CMS media references (four project covers and eight project-gallery entries) have been archived as actual files under `public/media/` on `develop`. Astro uses base-aware URLs resolving to these local files, not the Wix CDN. The large animated gameplay media was transferred through a one-time GitHub Actions import job. The source Wix site has not been modified. The project-detail pages now render the original Wix concept, idea, personal role copy, team sizes and individual gallery captions.
 
 Note that Takstrid's Wix cover is a decorative Matrix-style GIF, **not a gameplay screenshot**; its concept is primarily auditory. Site Zero's gameplay GIF is large (~25 MB), so an optimized web-video derivative is recommended before production launch.
+
+## Public repository links policy
+
+Portfolio pages must not link to source repositories that are private or otherwise not publicly accessible. Only link to a repository after its visibility has been verified as `public` using GitHub. Gameplay/demo links are separate and may remain when publicly accessible. The `develop` preview includes a build-time allowlist check for GitHub repository links. Verified public repo candidates: `Ruscemp/Roguelike-game` and `Ruscemp/Unreal3DRendering`; these are not automatically added to the website.

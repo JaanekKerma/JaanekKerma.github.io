@@ -23,6 +23,13 @@ const allFiles = (dir) =>
     const fullPath = join(dir, name);
     return statSync(fullPath).isDirectory() ? allFiles(fullPath) : [fullPath];
   });
+// Explicitly allow only repository URLs independently confirmed to be public.
+// User and organization profile URLs (one path segment) remain allowed.
+const publicRepositories = new Set([
+  'JaanekKerma/jaanekkerma.github.io',
+  'Ruscemp/Roguelike-game',
+  'Ruscemp/Unreal3DRendering',
+].map((name) => name.toLowerCase()));
 const broken = [];
 for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
   const html = readFileSync(filename, 'utf8');
@@ -30,6 +37,16 @@ for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
   for (const match of html.matchAll(/\b(?:href|src)="(\/(?!\/)[^"]+)"/g)) {
     if (!match[1].startsWith('/preview/')) {
       broken.push(`${relative(root, filename)}: ${match[1]}`);
+    }
+  }
+  for (const match of html.matchAll(/href="(https:\/\/github\.com\/[^"]+)"/g)) {
+    const url = new URL(match[1]);
+    const parts = url.pathname.split('/').filter(Boolean);
+    if (parts.length >= 2) {
+      const repoName = parts.slice(0, 2).join('/').toLowerCase();
+      if (!publicRepositories.has(repoName)) {
+        broken.push(`${relative(root, filename)}: repository visibility not approved: ${repoName}`);
+      }
     }
   }
   if (!html.includes('noindex')) {

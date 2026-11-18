@@ -75,7 +75,6 @@ export const projects: Project[] = [
     ],
     links: [
       { label: 'Play on itch.io', href: 'https://ruscemp.itch.io/fortunes-gate', primary: true },
-      { label: 'Source repository', href: 'https://github.com/Ruscemp/UnityGameJam2026' },
     ],
     featured: true,
     detailed: true,
