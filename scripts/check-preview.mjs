@@ -119,6 +119,24 @@ for (const filename of allFiles(root).filter((file) => file.endsWith('.html'))) 
   }
 }
 
+
+// The index must expose both groups, a text search, and combinable tag controls.
+const indexHtml = readFileSync(join(root, 'projects/index.html'), 'utf8');
+for (const requiredText of [
+  'id="project-search"', 'id="projects-gallery"',
+  'data-project-search', 'data-tag-filter', 'data-collection-filter',
+  'data-results-count', 'data-clear-filters', 'data-project-empty',
+  'data-collection-group="game-jam"', 'data-collection-group="university"',
+]) {
+  if (!indexHtml.includes(requiredText)) broken.push('Project search missing: ' + requiredText);
+}
+for (const expectedLabel of ['Solo', 'Team', 'Unity', 'Unreal', 'FPS', 'First Person']) {
+  if (!indexHtml.includes('>' + expectedLabel + '<')) broken.push('Project filter missing tag: ' + expectedLabel);
+}
+if ((indexHtml.match(/data-project-item/g) ?? []).length !== 6) {
+  broken.push('Expected six searchable project cards');
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
