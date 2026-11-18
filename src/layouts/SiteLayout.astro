@@ -3,12 +3,14 @@ import '../styles/global.css';
 import { sitePath } from '../utils/paths';
 import { projects } from '../data/projects';
 
+interface NavItem { label: string; id: string; }
 interface Props {
   title: string;
   description: string;
   type?: 'website' | 'article';
+  navItems?: NavItem[];
 }
-const { title, description, type = 'website' } = Astro.props;
+const { title, description, type = 'website', navItems = [] } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const onProjects = Astro.url.pathname.startsWith(sitePath('projects/'));
 const onContact = Astro.url.pathname.startsWith(sitePath('contact/'));
@@ -42,12 +44,11 @@ const isPreview = import.meta.env.BASE_URL.includes('/preview/');
           <span class="brand-copy"><strong>JAANEK KERMA</strong><small>GAME & SOFTWARE DEVELOPMENT</small></span>
         </a>
         <div class="header-actions">
-          <nav class="main-nav" aria-label="Primary navigation">
-            <a href={sitePath("projects/")} aria-current={onProjects ? 'page' : undefined}>Projects</a>
-            <a href={sitePath("#expertise")}>Expertise</a>
-            <a href={sitePath("#about")}>About</a>
-            <a class="nav-contact" href={sitePath("contact/")} aria-current={onContact ? 'page' : undefined}>Let's talk <span aria-hidden="true">↗</span></a>
-          </nav>
+          {navItems.length > 0 && (
+            <nav class="main-nav" aria-label="Sections of this page">
+              {navItems.map((item) => <a href={'#' + item.id}>{item.label}</a>)}
+            </nav>
+          )}
           <button class="menu-trigger" type="button" data-menu-trigger aria-controls="site-drawer" aria-expanded="false" aria-label="Open navigation menu">
             <span class="menu-trigger-copy">Menu</span>
             <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>

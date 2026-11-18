@@ -7,8 +7,16 @@ const phoneDisplay = '076 212 69 22';
 const phoneLink = '+46762126922';
 const fallbackSuccess = new URL(sitePath('contact/?submitted=1'), Astro.site).href;
 ---
-<SiteLayout title="Let's talk — Jaanek Kerma" description="Contact Jaanek Kerma about game programming, software development and testing. Professional email, telephone, GitHub, LinkedIn and a message form.">
-  <section class="contact-page-hero shell" aria-labelledby="contact-page-title">
+<SiteLayout
+  title="Let's talk — Jaanek Kerma"
+  description="Contact Jaanek Kerma about game programming, software development and testing. Professional email, telephone, GitHub, LinkedIn and a message form."
+  navItems={[
+    { label: 'Contact', id: 'contact-intro' },
+    { label: 'Details', id: 'contact-details' },
+    { label: 'Send a Message', id: 'send-message' },
+  ]}
+>
+  <section id="contact-intro" class="contact-page-hero shell" aria-labelledby="contact-page-title">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href={sitePath('')}>Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span>
     </nav>
@@ -20,7 +28,7 @@ const fallbackSuccess = new URL(sitePath('contact/?submitted=1'), Astro.site).hr
   </section>
 
   <section class="shell contact-page-grid" aria-label="Contact details and message form">
-    <div class="contact-details">
+    <div id="contact-details" class="contact-details">
       <div class="contact-details-intro">
         <span class="section-eyebrow">GET IN TOUCH / DIRECT</span>
         <h2>Find me here<span class="contact-dot">.</span></h2>
@@ -47,7 +55,7 @@ const fallbackSuccess = new URL(sitePath('contact/?submitted=1'), Astro.site).hr
       <p class="contact-location-line"><span class="availability-dot" aria-hidden="true"></span> Based in Sweden · Open to professional opportunities</p>
     </div>
 
-    <div class="contact-form-panel">
+    <div id="send-message" class="contact-form-panel">
       <div class="form-panel-topline"><span>MESSAGE / 001</span><span class="online-dot" aria-hidden="true"></span></div>
       <h2>Send a message.</h2>
       <p class="contact-form-description">Use this form to send a message to my email inbox. You can also reach me directly using the details beside the form.</p>

@@ -717,3 +717,101 @@ html { scroll-padding-top: 125px; }
 @media (prefers-reduced-motion: reduce) {
   .drawer-chevron { transition: none; }
 }
+
+/* Refinement 03: compact contextual header and denser homepage rhythm. */
+.site-header { height: 66px; }
+.site-header .header-inner { height: 100%; min-height: 0; padding-block: 0; gap: 16px; flex-wrap: nowrap; }
+.site-header .brand { gap: 12px; }
+.site-header .brand-symbol { font-size: 26px; min-width: 43px; }
+.site-header .brand-copy strong { font-size: .75rem; }
+.site-header .brand-copy small { font-size: .55rem; }
+.site-header .header-actions { margin-left: auto; gap: 15px; }
+.site-header .main-nav { gap: clamp(16px, 2.6vw, 32px); }
+.site-header .main-nav a { font-size: .83rem; font-weight: 620; color: #d2dbe2; }
+.site-header .main-nav a:hover, .site-header .main-nav a:focus-visible { color: var(--lime); }
+.site-header .menu-trigger { min-width: 83px; height: 39px; padding-inline: 12px; gap: 10px; }
+html { scroll-padding-top: 82px; }
+#intro, #work, #expertise, #about, #behind-the-code, #connect,
+#projects-overview, #projects-gallery, #project-top, #project-overview,
+#project-systems, #project-media, #contact-intro, #contact-details, #send-message { scroll-margin-top: 82px; }
+
+.hero { padding-block: 88px 104px; }
+.section-block { padding-block: 90px 98px; }
+#work .section-heading { margin-bottom: 37px; }
+.contact-inner { padding-block: 78px 86px; }
+
+/* Behind the Code combines Toolbox and About side by side on desktop. */
+.behind-code-hub { background: #2b3946; border-block: 1px solid var(--line); padding-block: 75px 82px; }
+.behind-code-grid { display: grid; grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr); gap: clamp(36px, 5vw, 72px); align-items: start; }
+.behind-code-hub .expertise-zone { padding: 0; background: transparent; border: 0; min-width: 0; }
+.behind-code-hub .expertise-zone > .shell { width: 100%; }
+.behind-code-hub .section-heading--compact { display: block; margin-bottom: 24px; }
+.behind-code-hub .section-heading--compact > p { max-width: 480px; margin: 14px 0 0; font-size: .89rem; line-height: 1.65; }
+.behind-code-hub .section-eyebrow { margin-bottom: 13px; }
+.behind-code-hub .section-heading h2, .behind-code-hub .about-copy h2 { font-size: clamp(2rem, 3.3vw, 3rem); line-height: 1.13; }
+.behind-code-hub .expertise-grid { display: grid; grid-template-columns: minmax(0,1fr); border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+.behind-code-hub .expertise-item, .behind-code-hub .expertise-item + .expertise-item {
+  display: grid; grid-template-columns: 55px minmax(0,1fr); column-gap: 10px; grid-template-rows: auto auto auto;
+  padding: 16px 0; min-height: 0; border-left: 0;
+}
+.behind-code-hub .expertise-item + .expertise-item { border-top: 1px solid var(--line); }
+.behind-code-hub .expertise-number { grid-column: 1; grid-row: 1; font-size: .63rem; }
+.behind-code-hub .expertise-icon { grid-column: 1; grid-row: 2 / 4; font-size: 2rem; margin: 9px 0 0; }
+.behind-code-hub .expertise-item h3 { grid-column: 2; grid-row: 1; margin: 0 0 5px; font-size: 1.17rem; letter-spacing: -.026em; }
+.behind-code-hub .expertise-item p { grid-column: 2; grid-row: 2; margin: 0 0 8px; font-size: .86rem; line-height: 1.55; }
+.behind-code-hub .expertise-tags { grid-column: 2; grid-row: 3; font-size: .61rem; line-height: 1.65; }
+.behind-code-hub .about-zone { width: 100%; padding: 0 0 0 clamp(24px, 3.5vw, 54px); border-left: 1px solid var(--line-strong); display: block; min-width: 0; }
+.behind-code-hub .about-label { display: block; margin-bottom: 30px; }
+.behind-code-hub .about-flourish { display: none; }
+.behind-code-hub .about-copy { max-width: none; }
+.behind-code-hub .about-copy h2 { margin: 0 0 23px; }
+.behind-code-hub .about-copy > p { font-size: .96rem; line-height: 1.78; margin-bottom: 17px; }
+.behind-code-hub .about-links { margin-top: 19px; gap: 18px; }
+.behind-code-hub .about-links a { font-size: .82rem; }
+
+@media (min-width: 1450px) { .hero { padding-block: 108px 122px; } }
+@media (max-width: 1000px) {
+  .behind-code-grid { grid-template-columns: minmax(0,1fr); gap: 38px; }
+  .behind-code-hub .about-zone { border-left: 0; border-top: 1px solid var(--line-strong); padding: 38px 0 0; }
+  .behind-code-hub .expertise-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .behind-code-hub .expertise-item, .behind-code-hub .expertise-item + .expertise-item {
+    display: flex; flex-direction: column; gap: 0; padding: 20px 18px; border-top: 0;
+  }
+  .behind-code-hub .expertise-item:first-child { padding-left: 0; }
+  .behind-code-hub .expertise-item:last-child { padding-right: 0; }
+  .behind-code-hub .expertise-item + .expertise-item { border-left: 1px solid var(--line); }
+  .behind-code-hub .expertise-icon { margin: 12px 0; }
+}
+@media (max-width: 850px) {
+  .site-header .main-nav > a:not(.nav-contact) { display: inline-flex; }
+  .site-header .main-nav { gap: 13px; }
+  .site-header .brand-copy small { display: none; }
+  .site-header .main-nav a { font-size: .76rem; }
+}
+@media (max-width: 690px) {
+  .site-header { height: 59px; }
+  .site-header .header-inner { height: 100%; min-height: 0; padding-block: 0; }
+  .site-header .main-nav { display: none; }
+  .site-header .brand-symbol { font-size: 24px; min-width: 39px; }
+  .site-header .brand-copy strong { font-size: .68rem; }
+  .site-header .menu-trigger { min-width: 45px; width: 45px; height: 39px; padding-inline: 8px; }
+  .site-header .menu-trigger-copy { display: none; }
+  html { scroll-padding-top: 72px; }
+  #intro, #work, #expertise, #about, #behind-the-code, #connect,
+  #projects-overview, #projects-gallery, #project-top, #project-overview,
+  #project-systems, #project-media, #contact-intro, #contact-details, #send-message { scroll-margin-top: 72px; }
+  .hero { padding-block: 59px 70px; }
+  .section-block { padding-block: 67px 77px; }
+  .behind-code-hub { padding-block: 58px 62px; }
+  .behind-code-hub .expertise-grid { grid-template-columns: minmax(0,1fr); }
+  .behind-code-hub .expertise-item, .behind-code-hub .expertise-item + .expertise-item {
+    display: grid; grid-template-columns: 50px minmax(0,1fr); padding: 15px 0;
+  }
+  .behind-code-hub .expertise-item + .expertise-item { border-left: 0; border-top: 1px solid var(--line); }
+  .behind-code-hub .expertise-item h3 { grid-column: 2; grid-row: 1; }
+  .behind-code-hub .expertise-item p { grid-column: 2; grid-row: 2; }
+  .behind-code-hub .expertise-tags { grid-column: 2; grid-row: 3; }
+  .behind-code-hub .expertise-number { grid-column: 1; grid-row: 1; }
+  .behind-code-hub .expertise-icon { grid-column: 1; grid-row: 2 / 4; }
+  .contact-inner { padding-block: 67px 75px; }
+}

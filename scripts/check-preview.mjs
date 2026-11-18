@@ -93,6 +93,32 @@ const siteStyles = allFiles(root).filter((f) => f.endsWith('.css')).map((f) => r
 if (!/\.site-header\s*\{[^}]*position:\s*sticky/s.test(siteStyles)) {
   broken.push('Menu header must remain sticky while scrolling');
 }
+
+const navByPage = new Map([
+  ['index.html', ['intro', 'work', 'behind-the-code']],
+  ['projects/index.html', ['projects-overview', 'projects-gallery']],
+  ['contact/index.html', ['contact-intro', 'contact-details', 'send-message']],
+]);
+for (const filename of allFiles(root).filter((file) => file.endsWith('.html'))) {
+  const page = relative(root, filename).replaceAll('\\', '/');
+  const html = readFileSync(filename, 'utf8');
+  const expected = navByPage.get(page)
+    ?? (page.startsWith('projects/') ? ['project-top', 'project-overview', 'project-systems'] : []);
+  const nav = html.match(/<nav class="main-nav"[^>]*>[\s\S]*?<\/nav>/)?.[0] ?? '';
+  if (!nav) {
+    broken.push(page + ': contextual page navigation is missing');
+    continue;
+  }
+  for (const id of expected) {
+    if (!nav.includes('href="#' + id + '"') || !html.includes('id="' + id + '"')) {
+      broken.push(page + ': contextual section target missing: ' + id);
+    }
+  }
+  if (nav.includes('href="/preview/projects/"') || nav.includes('href="/preview/contact/"')) {
+    broken.push(page + ': old global navigation link remains');
+  }
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }

@@ -4,8 +4,12 @@ import ProjectCard from '../../components/ProjectCard.astro';
 import { projects } from '../../data/projects';
 const hasMultipleCategories = new Set(projects.map((project) => project.category)).size > 1;
 ---
-<SiteLayout title="Projects — Jaanek Kerma" description="Game development and software engineering projects by Jaanek Kerma, with details about technologies, systems, and outcomes.">
-  <section class="listing-hero shell">
+<SiteLayout
+  title="Projects — Jaanek Kerma"
+  description="Game development and software engineering projects by Jaanek Kerma, with details about technologies, systems, and outcomes."
+  navItems={[{ label: 'Projects', id: 'projects-overview' }, { label: 'Project Gallery', id: 'projects-gallery' }]}
+>
+  <section id="projects-overview" class="listing-hero shell">
     <div class="section-eyebrow">PORTFOLIO / ALL PROJECTS</div>
     <h1>Selected <em>work.</em></h1>
     <p>Explore selected game projects and the engineering decisions behind them. Open a project to learn how it was made.</p>
@@ -20,7 +24,7 @@ const hasMultipleCategories = new Set(projects.map((project) => project.category
       )}
     </div>
   </section>
-  <section class="shell listing-section" aria-label="Projects">
+  <section id="projects-gallery" class="shell listing-section" aria-label="Projects">
     <div class="featured-grid projects-grid">
       {projects.map((project, index) => (
         <div data-category={project.category} class="project-grid-item"><ProjectCard project={project} index={index} /></div>
