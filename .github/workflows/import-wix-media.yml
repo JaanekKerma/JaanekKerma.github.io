@@ -1,0 +1,37 @@
+name: One-time Wix media archive
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - .github/workflows/import-wix-media.yml
+      - scripts/import-wix-media.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Download original published Wix media
+        run: node scripts/import-wix-media.mjs
+      - name: Commit archived files to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/media/site-zero/gameplay.gif public/media/tic-tac-toe/cover.gif
+          if git diff --cached --quiet; then
+            echo "All archive files already match"
+            exit 0
+          fi
+          git commit -m "Archive remaining original Wix gameplay GIFs"
+          git push origin HEAD:develop
