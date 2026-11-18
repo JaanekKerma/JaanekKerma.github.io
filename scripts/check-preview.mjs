@@ -31,7 +31,7 @@ const publicRepositories = new Set([
   'Ruscemp/Roguelike-game',
   'Ruscemp/Unreal3DRendering',
 ].map((name) => name.toLowerCase()));
-const allowedExternalHosts = new Set(['github.com', 'www.linkedin.com', 'ruscemp.itch.io', 'chhuusko.itch.io']);
+const allowedExternalHosts = new Set(['jaanekkerma.github.io', 'github.com', 'www.linkedin.com', 'ruscemp.itch.io', 'chhuusko.itch.io']);
 const broken = [];
 for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
   const html = readFileSync(filename, 'utf8');
