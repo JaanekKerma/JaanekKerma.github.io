@@ -895,13 +895,6 @@ html { scrollbar-gutter: stable; }
 .project-collection-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 25px; }
 .project-discovery-card { border: 1px solid var(--line); background: #273642; }
 .project-discovery-card .project-card { border: none; }
-.project-discovery-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 0 24px 20px;
-}
-.project-discovery-card-tags > span { padding: 5px 8px; border: 1px solid var(--line); font: .65rem var(--mono); color: #d2e3df; }
 .project-no-results { padding: 75px 25px; border-top: 1px solid var(--line-strong); text-align: center; }
 .project-no-results h2 { font-size: clamp(1.8rem, 3vw, 3rem); }
 .project-no-results p { max-width: 520px; color: var(--muted); margin: 15px auto 28px; }
@@ -924,5 +917,28 @@ html { scrollbar-gutter: stable; }
   .project-collection-heading { align-items: start; gap: 15px; flex-direction: column; }
   .project-collection-caption { text-align: left; }
   .project-collection-grid { grid-template-columns: 1fr; }
-  .project-discovery-card-tags { padding: 0 17px 17px; }
+}
+
+
+/* Refinement 05: first fold and anchor alignment.
+   Root scroll padding compensates for the 66px sticky header;
+   individual anchors should not add the same offset a second time. */
+html { scroll-padding-top: 78px; }
+#intro, #work, #expertise, #about, #behind-the-code, #connect,
+#projects-overview, #project-search, #projects-gallery, #project-top,
+#project-overview, #project-systems, #project-media,
+#contact-intro, #contact-details, #contact-panels, #send-message {
+  scroll-margin-top: 0;
+}
+.hero { padding-top: 18px; }
+.hero h1 { margin-top: 25px; }
+#work.section-heading { margin-bottom: 26px; }
+.project-discovery-card .project-card { height: 100%; }
+@media (min-width: 1450px) {
+  .hero { padding-top: 24px; }
+}
+@media (max-width: 690px) {
+  html { scroll-padding-top: 70px; }
+  .hero { padding-top: 10px; }
+  #work.section-heading { margin-bottom: 24px; }
 }

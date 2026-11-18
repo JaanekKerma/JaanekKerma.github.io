@@ -97,7 +97,7 @@ if (!/\.site-header\s*\{[^}]*position:\s*sticky/s.test(siteStyles)) {
 const navByPage = new Map([
   ['index.html', ['intro', 'work', 'behind-the-code']],
   ['projects/index.html', ['projects-overview', 'projects-gallery']],
-  ['contact/index.html', ['contact-intro', 'contact-details', 'send-message']],
+  ['contact/index.html', ['contact-intro', 'contact-panels']],
 ]);
 for (const filename of allFiles(root).filter((file) => file.endsWith('.html'))) {
   const page = relative(root, filename).replaceAll('\\', '/');
@@ -135,6 +135,27 @@ for (const expectedLabel of ['Solo', 'Team', 'Unity', 'Unreal', 'FPS', 'First Pe
 }
 if ((indexHtml.match(/<div\b[^>]*\bdata-project-item\b/g) ?? []).length !== 6) {
   broken.push('Expected six searchable project cards');
+}
+
+
+const projectPageNav = indexHtml.match(/<nav class="main-nav"[^>]*>[\s\S]*?<\/nav>/)?.[0] ?? '';
+const contactPageNav = contact.match(/<nav class="main-nav"[^>]*>[\s\S]*?<\/nav>/)?.[0] ?? '';
+for (const label of ['Top', 'Search &amp; Filter', 'Gallery']) {
+  if (!projectPageNav.includes(label)) broken.push('Projects header label missing: ' + label);
+}
+if (!contactPageNav.includes('>Top<') || !contactPageNav.includes('>Contact<')) {
+  broken.push('Contact header should contain Top and Contact');
+}
+if (indexHtml.includes('project-discovery-card-tags')) {
+  broken.push('External project tag strip must not be rendered');
+}
+const searchCards = indexHtml.match(/<article class="project-card[^"]*">[\s\S]*?<\/article>/g) ?? [];
+if (searchCards.length !== 6 || searchCards.some((card) => !card.includes('class="tag-row"'))) {
+  broken.push('All six projects must render tags inside their own cards');
+}
+const startFeatured = homepage.indexOf('id="work"');
+if (startFeatured < 0 || homepage.slice(0, startFeatured).includes('id="work" class="section-block')) {
+  broken.push('Featured Work anchor should be on the section heading');
 }
 
 if (broken.length) {

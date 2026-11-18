@@ -18,9 +18,9 @@ const filterTags = [
   title="Projects — Jaanek Kerma"
   description="Browse game jam and university programming projects by Jaanek Kerma. Search by name, technologies, role, and tags."
   navItems={[
-    { label: 'Projects', id: 'projects-overview' },
+    { label: 'Top', id: 'projects-overview' },
     { label: 'Search & Filter', id: 'project-search' },
-    { label: 'Project Gallery', id: 'projects-gallery' },
+    { label: 'Gallery', id: 'projects-gallery' },
   ]}
 >
   <section id="projects-overview" class="listing-hero shell">
@@ -115,10 +115,7 @@ const filterTags = [
                 collection.label,
               ].join(' ').toLowerCase()}
             >
-              <ProjectCard project={project} index={index} />
-              <div class="project-discovery-card-tags" aria-label={'Topics for ' + project.title}>
-                {projectDiscovery[project.slug].tags.slice(0, 6).map((tag) => <span>{tag}</span>)}
-              </div>
+              <ProjectCard project={project} index={index} tags={projectDiscovery[project.slug].tags.slice(0, 6)} />
             </div>
           ))}
         </div>

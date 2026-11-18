@@ -11,9 +11,8 @@ const fallbackSuccess = new URL(sitePath('contact/?submitted=1'), Astro.site).hr
   title="Let's talk — Jaanek Kerma"
   description="Contact Jaanek Kerma about game programming, software development and testing. Professional email, telephone, GitHub, LinkedIn and a message form."
   navItems={[
-    { label: 'Contact', id: 'contact-intro' },
-    { label: 'Details', id: 'contact-details' },
-    { label: 'Send a Message', id: 'send-message' },
+    { label: 'Top', id: 'contact-intro' },
+    { label: 'Contact', id: 'contact-panels' },
   ]}
 >
   <section id="contact-intro" class="contact-page-hero shell" aria-labelledby="contact-page-title">
@@ -27,7 +26,7 @@ const fallbackSuccess = new URL(sitePath('contact/?submitted=1'), Astro.site).hr
     </div>
   </section>
 
-  <section class="shell contact-page-grid" aria-label="Contact details and message form">
+  <section id="contact-panels" class="shell contact-page-grid" aria-label="Contact details and message form">
     <div id="contact-details" class="contact-details">
       <div class="contact-details-intro">
         <span class="section-eyebrow">GET IN TOUCH / DIRECT</span>

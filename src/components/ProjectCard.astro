@@ -7,8 +7,10 @@ interface Props {
   project: Project;
   index: number;
   prominent?: boolean;
+  tags?: readonly string[];
 }
-const { project, index, prominent = false } = Astro.props;
+const { project, index, prominent = false, tags } = Astro.props;
+const displayedTags = tags ?? project.stack.slice(0, 4);
 ---
 <article class={'project-card' + (prominent ? ' project-card--prominent' : '')}>
   <a class="project-card__visual" href={sitePath('projects/' + project.slug + '/')} aria-label={'Read about ' + project.title}>
@@ -28,7 +30,7 @@ const { project, index, prominent = false } = Astro.props;
     </div>
     <p>{project.summary}</p>
     <div class="tag-row" aria-label="Technologies used">
-      {project.stack.slice(0, 4).map((tool) => <span class="tag">{tool}</span>)}
+      {displayedTags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
   </div>
 </article>
