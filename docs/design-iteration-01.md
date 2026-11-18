@@ -53,3 +53,11 @@ Create a functional first visual iteration in Astro rather than a static mockup.
 
 GitHub Actions builds the static Astro site for pushes to \`develop\`.
 Only \`main\` has a deployment workflow. Merge/publish only after explicit approval.
+
+
+## Iteration 02 — contrast and visual balance
+
+Review feedback: the overall direction is good, but the nearly-black palette feels slightly too dark.
+Changes: lift background surfaces into dark slate-blue, improve secondary-text contrast, and strengthen card and section separation. Keep the pale-green accent, typographic system, page architecture, and project artworks unchanged. This is a conservative refinement, not a new design direction.
+
+Next: replace illustrative visuals with actual approved project media and continue factual case-study enrichment. Keep private employer/client projects excluded.
