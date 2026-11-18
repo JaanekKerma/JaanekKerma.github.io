@@ -50,7 +50,7 @@ jobs:
                 a{color:#b9ec91}
               </style>
             </head>
-            <body><main><h1>Jaanek Kerma</h1><p>My new portfolio is being designed and reviewed. The development version is available as a separate preview; the existing Wix portfolio remains the current published version.</p><p><a href="/preview/">Explore the development preview →</a> · <a href="https://jaanekkerma.wixsite.com/portfolio">Current portfolio →</a></p></main></body>
+            <body><main><h1>Jaanek Kerma</h1><p>My portfolio is being refined. Explore the latest project pages in the development preview.</p><p><a href="/preview/">Explore the development preview →</a></p></main></body>
           </html>
           HTML
       - name: Upload Pages artifact

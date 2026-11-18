@@ -10,6 +10,7 @@ const required = [
   'projects/takstrid/index.html',
   'projects/grim-farmlore/index.html',
   'projects/tic-tac-toe/index.html',
+  'projects/ninja-frog-saga/index.html',
   'favicon.svg',
 ];
 if (existsSync(join(root, 'projects/wpf-settings/index.html'))) {
@@ -30,6 +31,7 @@ const publicRepositories = new Set([
   'Ruscemp/Roguelike-game',
   'Ruscemp/Unreal3DRendering',
 ].map((name) => name.toLowerCase()));
+const allowedExternalHosts = new Set(['github.com', 'www.linkedin.com', 'ruscemp.itch.io', 'chhuusko.itch.io']);
 const broken = [];
 for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
   const html = readFileSync(filename, 'utf8');
@@ -49,6 +51,10 @@ for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
       }
     }
   }
+  for (const match of html.matchAll(/\b(?:href|src)="(https:\/\/[^"]+)"/g)) {
+    const url = new URL(match[1]);
+    if (!allowedExternalHosts.has(url.hostname)) broken.push(`${relative(root, filename)}: unapproved external host: ${url.hostname}`);
+  }
   if (!html.includes('noindex')) {
     broken.push(`${relative(root, filename)}: missing noindex directive`);
   }
@@ -56,4 +62,4 @@ for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
-console.log('Preview verified: 7 pages, forbidden project absent, favicon, scoped links, and noindex metadata.');
+console.log('Preview verified: 8 pages, forbidden project absent, favicon, scoped links, and noindex metadata.');

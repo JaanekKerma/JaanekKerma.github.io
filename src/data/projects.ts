@@ -1,4 +1,4 @@
-export type ProjectVisual = 'fortune' | 'arena' | 'takstrid' | 'farmlore' | 'tictactoe';
+export type ProjectVisual = 'fortune' | 'arena' | 'takstrid' | 'farmlore' | 'tictactoe' | 'frog';
 export type ProjectCategory = 'game' | 'software';
 
 export interface Project {
@@ -22,12 +22,11 @@ export interface Project {
   coverImage?: string;
   coverAlt?: string;
   teamSize?: number;
-  wixOriginal?: {
+  projectBackground?: {
     subtitle?: string;
     idea?: string;
     concept?: string;
     myRole?: string;
-    sourcePage?: string;
   };
   gallery?: { title: string; description: string; url: string; alt: string; }[];
 }
@@ -82,14 +81,13 @@ export const projects: Project[] = [
   {
     slug: 'site-zero',
     coverImage: "media/site-zero/cover.png",
-    coverAlt: "Site Zero original Wix portfolio cover artwork",
+    coverAlt: "Site Zero project cover artwork",
     teamSize: 9,
-    wixOriginal: {
+    projectBackground: {
       "subtitle": "FPS - University - 9 weeks",
       "idea": "Site Zero is about sharp decisions, faster reflexes, and learning how to outthink your opponent while the bullets are flying.\n\nInstead of pre-set loadouts, players start each round with only a basic pistol with bonuses for farming drones. To gain the upper hand, the players need to take down AI-controlled drones and reach the central lootbox to gather Batteries. These are used to unlock and upgrade new weapons in real time, forcing quick thinking and adaptability throughout each match.",
       "concept": "Site Zero is a competitive 1v1 first-person arena looter shooter where fast movement, smart decisions, and precise aim decide the winner. Matches take place inside a partially-built industrial site, filled with vertical spaces, tight corridors, and open arenas. It’s a place built for creative movement, smart positioning, and calculated risk-taking. ",
-      "myRole": "Programmer",
-      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/unreal-shooter"
+      "myRole": "Programmer"
     },
     gallery: [
       {
@@ -119,28 +117,25 @@ export const projects: Project[] = [
     context:
       'Site Zero pits two enhanced operatives against one another over unstable Electrum energy in an abandoned construction site. It was developed as a nine-week university project.',
     challenge:
-      'The existing portfolio describes a combination of movement, high-stakes combat, and looting. The exact individual programming contributions will be documented in the next content pass.',
+      'The game combines fast movement, drone encounters, 1v1 combat, and in-round weapon progression.',
     systems: [
       { title: 'Competitive arena design', description: 'The documented concept centers on a direct 1v1 confrontation.' },
       { title: 'Movement and decisions', description: 'Fast movement, precision, and risk-taking are central to the stated gameplay experience.' },
     ],
-    notes: ['Technical implementation details and individual team responsibilities still need verification before final publication.'],
-    links: [
-      { label: 'Original project page', href: 'https://jaanekkerma.wixsite.com/portfolio/my-projects/unreal-shooter', primary: true },
-    ],
+    notes: ['The published game page credits me among five programmers in the nine-person team.', 'The downloadable Windows builds support two local players with different input configurations.'],
+    links: [{ label: 'Download Site Zero', href: 'https://chhuusko.itch.io/site-zero', primary: true }],
     featured: true,
   },
   {
     slug: 'takstrid',
     coverImage: "media/takstrid/cover.gif",
-    coverAlt: "Takstrid original Wix portfolio cover artwork",
+    coverAlt: "Takstrid project cover artwork",
     teamSize: 2,
-    wixOriginal: {
+    projectBackground: {
       "subtitle": "Action/Horror - University -   10 weeks",
       "idea": "The player finds themselves on a rooftop during a stormy night with no idea how they got there. A brief voiceover explains that a monster is chasing them, but then everything is told through sound. The goal is to survive each round, where the danger increases with each round - the fence around the edges of the roof disappears until there is nothing left to prevent the player from falling to their death. The monster is an unidentified, terrifying creature that moves erratically, but always reveals itself through sound.",
       "concept": "The game takes place on a large roof where the player navigates only through sound. The player can perform two actions: move in different directions and shoot. By listening to the strength of the wind, the monster's breathing, footsteps and roars, as well as background sounds (highway, forest, waterfall), the player orients himself in the world. The game has no graphics, everything is represented through sound.",
-      "myRole": "Developer. Responsibility here was not strictly defined between me and Elin (the other delevoper) and thus both of us were responsible for all. But the initial idea for this game was mine.",
-      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/takstrid"
+      "myRole": "Developer. Responsibility here was not strictly defined between me and Elin (the other delevoper) and thus both of us were responsible for all. But the initial idea for this game was mine."
     },
     gallery: [],
 
@@ -178,24 +173,21 @@ export const projects: Project[] = [
     notes: [
       'The experience was conceived without reliance on graphics, rather than as a conventional visually driven game with optional audio.',
       'I originated the concept and shared development responsibilities with one other developer.',
-      'The original Wix portfolio includes this project; gameplay media and detailed team credits are pending migration.',
+      'The game relies on sound for navigation and moment-to-moment feedback.',
     ],
-    links: [
-      { label: 'Original Wix project page', href: 'https://jaanekkerma.wixsite.com/portfolio/my-projects/takstrid', primary: true },
-    ],
+    links: [],
     featured: true,
   },
   {
     slug: 'grim-farmlore',
     coverImage: "media/grim-farmlore/cover.png",
-    coverAlt: "Grim Farmlore original Wix portfolio cover artwork",
+    coverAlt: "Grim Farmlore project cover artwork",
     teamSize: 3,
-    wixOriginal: {
+    projectBackground: {
       "subtitle": "RPG - University - 5 weeks",
       "idea": "Grim Farmlore was created to blend classic farming simulation with dark fantasy RPG elements. The goal was to create a mobile experience where players manage a farm while uncovering a mysterious narrative, making meaningful choices, and surviving in a cursed, story-rich world.",
       "concept": "Grim Farmlore is a mobile RPG and farming simulator set in a dark fantasy world where players manage a cursed farm while uncovering ancient secrets and battling enemies. The game blends narrative-driven exploration, strategic farming, and branching dialogues.",
-      "myRole": "I was solely responsible for designing and implementing several core systems in the game, including the main menu, dialogue system, and interactable objects. My work covered both programming and integration of visual/audio effects, along with writing the story used in in-game dialogues and managing scene structure.",
-      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/grim-farmlore"
+      "myRole": "I was solely responsible for designing and implementing several core systems in the game, including the main menu, dialogue system, and interactable objects. My work covered both programming and integration of visual/audio effects, along with writing the story used in in-game dialogues and managing scene structure."
     },
     gallery: [
       {
@@ -258,24 +250,21 @@ export const projects: Project[] = [
     notes: [
       'Created for Android using Unity and C#.',
       'My individual contributions are described separately from the overall team-developed game concept.',
-      'Original project screenshots and media are not yet embedded in this Astro version.',
+      'The gallery includes original interface and implementation captures.',
     ],
-    links: [
-      { label: 'Original Wix project gallery', href: 'https://jaanekkerma.wixsite.com/portfolio/my-projects', primary: true },
-    ],
+    links: [],
     featured: true,
   },
   {
     slug: 'tic-tac-toe',
     coverImage: "media/tic-tac-toe/cover.gif",
-    coverAlt: "Tic Tac Toe original Wix portfolio cover artwork",
+    coverAlt: "Tic Tac Toe project cover artwork",
     teamSize: 1,
-    wixOriginal: {
+    projectBackground: {
       "subtitle": "Puzzle - University - 2 Weeks",
       "idea": "The goal was to reimagine the classic Tic-Tac-Toe game with a fun, thematic twist. I chose a playful Space Party theme to add personality and visual interest, while still focusing on clean mechanics and mobile-friendly interaction. The idea was to make a simple game feel dynamic and polished through animation, sound, and cohesive design.",
       "concept": "As part of a university assignment, I developed a mobile-friendly Tic-Tac-Toe game with a cohesive Space theme. The goal was to create an engaging user experience using consistent visuals and smooth animations, bringing a playful twist to a classic game through stylized graphics and animated UI transitions.",
-      "myRole": "I was solely responsible for the entire project, handling everything from concept to completion. I designed and developed the game using Unity for implementation and Photoshop for creating all visual assets.",
-      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/tic-tac-toe"
+      "myRole": "I was solely responsible for the entire project, handling everything from concept to completion. I designed and developed the game using Unity for implementation and Photoshop for creating all visual assets."
     },
     gallery: [
       {
@@ -310,13 +299,37 @@ export const projects: Project[] = [
       { title: 'Gameplay implementation', description: 'Game flow and interface logic were built in Unity.' },
       { title: 'Visual system', description: 'A cohesive space theme and animated UI were created with custom Photoshop assets.' },
     ],
-    notes: ['The original Wix page has further visual material that can be migrated after asset review.'],
-    links: [
-      { label: 'Original project page', href: 'https://jaanekkerma.wixsite.com/portfolio/my-projects/tic-tac-toe', primary: true },
-    ],
+    notes: ['The project gallery documents UI interactions and visual design.'],
+    links: [],
     featured: true,
   },
 
+  {
+    slug: 'ninja-frog-saga',
+    title: 'Ninja Frog Adventure Saga',
+    category: 'game',
+    visual: 'frog',
+    eyebrow: '2D platformer · Solo university project',
+    timeframe: 'Early university coursework · 2024',
+    role: 'Solo developer',
+    stack: ['Unity', '2D', 'HTML5'],
+    summary: 'An early solo Unity platformer starring an agile ninja frog, with traps and grappling-hook movement.',
+    lead: 'An early browser-playable experiment in movement, obstacles, and 2D platforming.',
+    context: 'Created solo during early game-development studies at Stockholm University. The Unity platformer is published as a playable HTML5 project, and its page labels the game an incomplete work in progress.',
+    challenge: 'Build a playable platforming prototype that explores character movement, level flow, and environmental obstacles.',
+    systems: [
+      { title: 'Platform navigation', description: 'Guide the frog over platforms and around hazards and traps.' },
+      { title: 'Agile traversal', description: 'Experiment with platforming movement and grappling-hook traversal in a 2D environment.' },
+      { title: 'Browser-based playtesting', description: 'A playable HTML5 build is available on the public game page.' },
+    ],
+    notes: [
+      'Developed solo during my early university studies.',
+      'This is an incomplete early-stage game, presented as a learning project rather than a finished production.',
+      'The illustration shown here is representative artwork, not an in-game screenshot.',
+    ],
+    links: [{ label: 'Play in browser', href: 'https://ruscemp.itch.io/ninja-frog-saga', primary: true }],
+    featured: true,
+  },
 ];
 
 export const featuredProjects = projects.filter((project) => project.featured);
