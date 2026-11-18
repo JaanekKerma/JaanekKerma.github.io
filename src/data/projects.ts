@@ -1,4 +1,4 @@
-export type ProjectVisual = 'fortune' | 'arena' | 'tictactoe' | 'desktop';
+export type ProjectVisual = 'fortune' | 'arena' | 'tictactoe';
 export type ProjectCategory = 'game' | 'software';
 
 export interface Project {
@@ -123,33 +123,7 @@ export const projects: Project[] = [
     ],
     featured: true,
   },
-  {
-    slug: 'wpf-settings',
-    title: 'WPF Settings App',
-    category: 'software',
-    visual: 'desktop',
-    eyebrow: 'Desktop software · C#',
-    timeframe: 'Independent software project',
-    role: 'C# / WPF application',
-    stack: ['C#', 'WPF', 'INI files'],
-    summary:
-      'A desktop application for reading and writing configuration data in INI files.',
-    lead:
-      'A practical software project about making configuration easier to inspect and edit.',
-    context:
-      'This repository contains a C# WPF desktop application for reading and writing INI configuration files. Its README currently provides a short feature description.',
-    challenge:
-      'Expose configuration files through a desktop interface rather than requiring direct manual editing.',
-    systems: [
-      { title: 'Desktop application', description: 'The project uses Windows Presentation Foundation (WPF) with C#.' },
-      { title: 'Configuration persistence', description: 'The repository describes reading and writing INI files.' },
-    ],
-    notes: ['A deeper technical account and screenshots should be added only after reviewing the current implementation.'],
-    links: [
-      { label: 'View GitHub repository', href: 'https://github.com/Ruscemp/WPF_Settings_App', primary: true },
-    ],
-    featured: true,
-  },
+
 ];
 
 export const featuredProjects = projects.filter((project) => project.featured);

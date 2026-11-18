@@ -2,19 +2,22 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { projects } from '../../data/projects';
+const hasMultipleCategories = new Set(projects.map((project) => project.category)).size > 1;
 ---
 <SiteLayout title="Projects — Jaanek Kerma" description="Game development and software engineering projects by Jaanek Kerma, with details about technologies, systems, and outcomes.">
   <section class="listing-hero shell">
     <div class="section-eyebrow">PORTFOLIO / ALL PROJECTS</div>
     <h1>Selected <em>work.</em></h1>
-    <p>Game experiences, programming experiments, and practical software. Open a project to explore the implementation and its context.</p>
+    <p>Explore selected game projects and the engineering decisions behind them. Open a project to learn how it was made.</p>
     <div class="project-filter-bar">
       <span class="project-counter">01—{String(projects.length).padStart(2, '0')} / PROJECT INDEX</span>
-      <div class="project-filters" data-filter-controls hidden aria-label="Filter projects">
-        <button type="button" class="filter-button" data-filter="all" aria-pressed="true">All</button>
-        <button type="button" class="filter-button" data-filter="game" aria-pressed="false">Games</button>
-        <button type="button" class="filter-button" data-filter="software" aria-pressed="false">Software</button>
-      </div>
+      {hasMultipleCategories && (
+        <div class="project-filters" data-filter-controls hidden aria-label="Filter projects">
+          <button type="button" class="filter-button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-button" data-filter="game" aria-pressed="false">Games</button>
+          <button type="button" class="filter-button" data-filter="software" aria-pressed="false">Software</button>
+        </div>
+      )}
     </div>
   </section>
   <section class="shell listing-section" aria-label="Projects">

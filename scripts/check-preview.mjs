@@ -8,9 +8,11 @@ const required = [
   'projects/fortunes-gate/index.html',
   'projects/site-zero/index.html',
   'projects/tic-tac-toe/index.html',
-  'projects/wpf-settings/index.html',
   'favicon.svg',
 ];
+if (existsSync(join(root, 'projects/wpf-settings/index.html'))) {
+  throw new Error('Disallowed project page must not be generated.');
+}
 for (const file of required) {
   if (!existsSync(join(root, file))) throw new Error(`Missing preview file: ${file}`);
 }
@@ -35,4 +37,4 @@ for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
-console.log('Preview verified: 6 pages, favicon, scoped links, and noindex metadata.');
+console.log('Preview verified: 5 pages, forbidden project absent, favicon, scoped links, and noindex metadata.');

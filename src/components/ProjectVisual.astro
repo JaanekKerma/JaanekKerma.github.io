@@ -10,7 +10,6 @@ const labels: Record<VisualType, string> = {
   fortune: 'Abstract diagram of number entities flowing through arithmetic gates',
   arena: 'Abstract tactical arena diagram with targeting reticle',
   tictactoe: 'Stylized tic-tac-toe board floating in a starfield',
-  desktop: 'Stylized desktop configuration editor',
 };
 ---
 <div class={'project-visual visual-' + variant + (large ? ' visual-large' : '')} role="img" aria-label={labels[variant]}>
@@ -88,23 +87,5 @@ const labels: Record<VisualType, string> = {
       <span class="visual-bottomline" aria-hidden="true">PLAYER_01 / YOUR_MOVE</span>
     </>
   )}
-  {variant === 'desktop' && (
-    <>
-      <span class="visual-topline" aria-hidden="true">CFG / SETTINGS.INI</span>
-      <div class="desktop-window" aria-hidden="true">
-        <div class="desktop-titlebar"><span class="window-dots"><i></i><i></i><i></i></span><span>settings.ini</span><span>— □ ×</span></div>
-        <div class="desktop-content">
-          <div class="desktop-sidebar"><b>GENERAL</b><span>Profiles</span><span class="selected">Settings</span><span>Advanced</span></div>
-          <div class="desktop-fields">
-            <span class="code-comment">[configuration]</span>
-            <span><em>language</em> <b>=</b> <strong>en</strong></span>
-            <span><em>autosave</em> <b>=</b> <strong>true</strong></span>
-            <span><em>theme</em> <b>=</b> <strong>dark</strong></span>
-            <div class="desktop-cta">Save changes <span>↗</span></div>
-          </div>
-        </div>
-      </div>
-      <span class="visual-bottomline" aria-hidden="true">READ / EDIT / WRITE</span>
-    </>
-  )}
+
 </div>

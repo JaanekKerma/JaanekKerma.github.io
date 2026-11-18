@@ -17,10 +17,10 @@ Create a functional first visual iteration in Astro rather than a static mockup.
 
 ## Implemented routes
 
-- \`/\`: hero, latest flagship feature, 4 project cards, expertise, about, contact.
+- \`/\`: hero, latest flagship feature, 3 project cards, expertise, about, contact.
 - \`/projects/\`: project index with progressive-enhancement category filtering.
 - \`/projects/fortunes-gate/\`: full case-study iteration, supported by the itch.io release and GitHub.
-- \`/projects/site-zero/\`, \`/projects/tic-tac-toe/\`, \`/projects/wpf-settings/\`: concise evidence-based pages using the same reusable template.
+- \`/projects/site-zero/\`, \`/projects/tic-tac-toe/\`: concise evidence-based pages using the same reusable template.
 
 ## Component/data approach
 
@@ -35,9 +35,9 @@ Create a functional first visual iteration in Astro rather than a static mockup.
 
 - Fortune's Gate facts and mechanics: https://ruscemp.itch.io/fortunes-gate.
 - Site Zero and Tic Tac Toe: existing Wix project/feature descriptions, no unverified personal technical credits.
-- WPF Settings App: public repository README states C# WPF INI read/write capability.
 - Site remains a **design iteration**, with explicit labels that visual studies are not screenshots.
 - Avoid claiming the Stockholm University degree was formally awarded until verified.
+- Exclude employer/client work from public project pages unless authorized.
 - No public CV file has been added; no fabricated testimonials, metrics, images, or professional endorsements.
 
 ## Review questions for the next iteration

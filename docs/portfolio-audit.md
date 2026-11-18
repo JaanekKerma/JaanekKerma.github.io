@@ -37,12 +37,11 @@ Earlier exploration identified **Takstrid** and **Grim Farmlore** as additional 
 
 ## 3. Candidate additions from GitHub
 
-Repository contents were checked, but inclusion is **not yet approved**.
+Repository contents were checked, but inclusion is **not yet approved**. Projects produced for employers or other clients are excluded unless publication permission is explicitly established.
 
 | Candidate | Source | Evidence/next step | Suggested role |
 | --- | --- | --- | --- |
 | Fortune's Gate | [UnityGameJam2026](https://github.com/Ruscemp/UnityGameJam2026) | Unity project structure, docs, and assets exist; confirm final itch.io URL and screenshots | Likely flagship game-programming case study |
-| WPF settings app | [WPF_Settings_App](https://github.com/Ruscemp/WPF_Settings_App) | C# WPF repository with README and application solution; confirm whether public presentation is appropriate | General software-engineering candidate |
 | Timetable app | [TimeTableV2](https://github.com/Ruscemp/TimeTableV2) | Java project structure exists; inspect actual features and project maturity | Supporting software project if strong enough |
 | Incremental game | [IncrementalGame](https://github.com/Ruscemp/IncrementalGame) | Unity project structure exists; evaluate completeness | Optional game project |
 | Roguelike | [Roguelike-game](https://github.com/Ruscemp/Roguelike-game) | C# source files exist; assess readiness and architecture | Optional programming exercise |
