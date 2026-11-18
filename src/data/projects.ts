@@ -19,6 +19,17 @@ export interface Project {
   links: { label: string; href: string; primary?: boolean }[];
   featured?: boolean;
   detailed?: boolean;
+  coverImage?: string;
+  coverAlt?: string;
+  teamSize?: number;
+  wixOriginal?: {
+    subtitle?: string;
+    idea?: string;
+    concept?: string;
+    myRole?: string;
+    sourcePage?: string;
+  };
+  gallery?: { title: string; description: string; url: string; alt: string; }[];
 }
 
 export const projects: Project[] = [
@@ -71,15 +82,39 @@ export const projects: Project[] = [
   },
   {
     slug: 'site-zero',
+    coverImage: "https://static.wixstatic.com/media/2e665a_4b69814683fc4498b8a9650f7e1ed24f~mv2.png",
+    coverAlt: "Site Zero original Wix portfolio cover artwork",
+    teamSize: 9,
+    wixOriginal: {
+      "subtitle": "FPS - University - 9 weeks",
+      "idea": "Site Zero is about sharp decisions, faster reflexes, and learning how to outthink your opponent while the bullets are flying.\n\nInstead of pre-set loadouts, players start each round with only a basic pistol with bonuses for farming drones. To gain the upper hand, the players need to take down AI-controlled drones and reach the central lootbox to gather Batteries. These are used to unlock and upgrade new weapons in real time, forcing quick thinking and adaptability throughout each match.",
+      "concept": "Site Zero is a competitive 1v1 first-person arena looter shooter where fast movement, smart decisions, and precise aim decide the winner. Matches take place inside a partially-built industrial site, filled with vertical spaces, tight corridors, and open arenas. It’s a place built for creative movement, smart positioning, and calculated risk-taking. ",
+      "myRole": "Programmer",
+      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/unreal-shooter"
+    },
+    gallery: [
+      {
+        "title": "Gameplay",
+        "description": "Each round resets the playing field. There’s no long-term power gain between matches, which means every fight is decided by how well you adapt in the moment. The game loop balances PvP and PvE, with players choosing whether to hunt safer drones on the outskirts or dive into riskier central fights for bigger rewards.",
+        "url": "https://static.wixstatic.com/media/2e665a_991403d178804341bbc43d77d5799444~mv2.gif",
+        "alt": "Gameplay"
+      },
+      {
+        "title": "Site Zero Area",
+        "description": "Matches take place inside a partially-built industrial site, filled with vertical spaces, tight corridors, and open arenas. It’s a place built for creative movement, smart positioning, and calculated risk-taking. ",
+        "url": "https://static.wixstatic.com/media/2e665a_27ffd01cfb464ce7bfe3ce2095c4b636~mv2.avif",
+        "alt": "Site Zero Area"
+      }
+    ],
+
     title: 'Site Zero',
     category: 'game',
     visual: 'arena',
     eyebrow: 'Unreal · FPS · University project',
     timeframe: '9-week university project',
-    role: 'University team project',
+    role: 'Programmer · Nine-person team',
     stack: ['Unreal Engine', 'First-person gameplay', 'Multiplayer concept'],
-    summary:
-      'A competitive 1v1 first-person arena looter-shooter set in a dystopian construction site.',
+    summary: "Site Zero is a competitive 1v1 first-person arena looter shooter where fast movement, smart decisions, and precise aim decide the winner. Set in a gritty dystopian future, enhanced operatives fight in high-stakes duels over unstable Electrum energy, inside an abandoned construction site.",
     lead:
       'A fast-paced arena shooter built around movement, aim, and split-second resource decisions.',
     context:
@@ -98,15 +133,26 @@ export const projects: Project[] = [
   },
   {
     slug: 'takstrid',
+    coverImage: "https://static.wixstatic.com/media/2e665a_e27f9708d3a64ecd8d03e0a52a3ad750~mv2.gif",
+    coverAlt: "Takstrid original Wix portfolio cover artwork",
+    teamSize: 2,
+    wixOriginal: {
+      "subtitle": "Action/Horror - University -   10 weeks",
+      "idea": "The player finds themselves on a rooftop during a stormy night with no idea how they got there. A brief voiceover explains that a monster is chasing them, but then everything is told through sound. The goal is to survive each round, where the danger increases with each round - the fence around the edges of the roof disappears until there is nothing left to prevent the player from falling to their death. The monster is an unidentified, terrifying creature that moves erratically, but always reveals itself through sound.",
+      "concept": "The game takes place on a large roof where the player navigates only through sound. The player can perform two actions: move in different directions and shoot. By listening to the strength of the wind, the monster's breathing, footsteps and roars, as well as background sounds (highway, forest, waterfall), the player orients himself in the world. The game has no graphics, everything is represented through sound.",
+      "myRole": "Developer. Responsibility here was not strictly defined between me and Elin (the other delevoper) and thus both of us were responsible for all. But the initial idea for this game was mine.",
+      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/takstrid"
+    },
+    gallery: [],
+
     title: 'Takstrid',
     category: 'game',
     visual: 'takstrid',
     eyebrow: 'Audio-first · Action / horror · University project',
-    timeframe: 'University game project',
-    role: 'Audio implementation · Team project',
+    timeframe: '10-week university project',
+    role: 'Co-developer · Original concept · Two-person team',
     stack: ['Unreal Engine', 'C++', 'Spatial audio', 'Accessibility'],
-    summary:
-      'An audio-only action-horror experience designed to be navigable and playable without sight.',
+    summary: "Takstrid is a sound-driven action-horror adventure created primarily for blind players. Navigate a dangerous rooftop, follow the sound of the wind and the monster, avoid hazards and defeat the enemy - a completely new experience where your ears are your main weapon and where horror is created through sound.",
     lead:
       'When visuals cannot carry information, sound needs to become the interface, the feedback, and the world itself.',
     context:
@@ -132,7 +178,7 @@ export const projects: Project[] = [
     ],
     notes: [
       'The experience was conceived without reliance on graphics, rather than as a conventional visually driven game with optional audio.',
-      'My work involved sound implementation within the Unreal/C++ project.',
+      'I originated the concept and shared development responsibilities with one other developer.',
       'The original Wix portfolio includes this project; gameplay media and detailed team credits are pending migration.',
     ],
     links: [
@@ -142,19 +188,55 @@ export const projects: Project[] = [
   },
   {
     slug: 'grim-farmlore',
+    coverImage: "https://static.wixstatic.com/media/2e665a_fbc1e144cf3640fbb2db9c3b0693bc16~mv2.png",
+    coverAlt: "Grim Farmlore original Wix portfolio cover artwork",
+    teamSize: 3,
+    wixOriginal: {
+      "subtitle": "RPG - University - 5 weeks",
+      "idea": "Grim Farmlore was created to blend classic farming simulation with dark fantasy RPG elements. The goal was to create a mobile experience where players manage a farm while uncovering a mysterious narrative, making meaningful choices, and surviving in a cursed, story-rich world.",
+      "concept": "Grim Farmlore is a mobile RPG and farming simulator set in a dark fantasy world where players manage a cursed farm while uncovering ancient secrets and battling enemies. The game blends narrative-driven exploration, strategic farming, and branching dialogues.",
+      "myRole": "I was solely responsible for designing and implementing several core systems in the game, including the main menu, dialogue system, and interactable objects. My work covered both programming and integration of visual/audio effects, along with writing the story used in in-game dialogues and managing scene structure.",
+      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/grim-farmlore"
+    },
+    gallery: [
+      {
+        "title": "Main Menu Implementation",
+        "description": "This animated main menu was fully designed and programmed by me. I handled everything from layout and button functionality to visual transitions, sound effects, and localization integration, ensuring a smooth and responsive user experience that fits the game’s dark fantasy atmosphere.",
+        "url": "https://static.wixstatic.com/media/2e665a_7e530a930b99492096b32535318dbe5b~mv2.gif",
+        "alt": "Main Menu Implementation"
+      },
+      {
+        "title": "Settings Panel Development",
+        "description": "I designed and programmed the game’s settings panel, including audio sliders, graphics quality control, and language selection with localization support. The system was built in Unity using custom scripts to ensure all settings persist and apply correctly across sessions, enhancing user accessibility and gameplay experience.",
+        "url": "https://static.wixstatic.com/media/2e665a_008c40420f6f47e8809c4e19d39ffd98~mv2.png",
+        "alt": "Settings Panel Development"
+      },
+      {
+        "title": "Dialogue System with Ink Integration",
+        "description": "I implemented a branching dialogue system using the Ink narrative scripting language and integrated it into Unity. This system supports dynamic conversations, player choices, and real-time updates to the game state, enabling immersive storytelling and flexible narrative design.",
+        "url": "https://static.wixstatic.com/media/2e665a_16f94394a8cf4d42aef13f65e60339c1~mv2.png",
+        "alt": "Dialogue System with Ink Integration"
+      },
+      {
+        "title": "Randomized Spawning System",
+        "description": "I developed a flexible spawning system in Unity that dynamically populates areas with randomized enemies and objects. The system accounts for spawn bounds, movement parameters, combat stats, and spawn frequency—allowing for varied encounters and procedural gameplay without manual placement.",
+        "url": "https://static.wixstatic.com/media/2e665a_aa92f46629234fd28885ece36c20bfaa~mv2.png",
+        "alt": "Randomized Spawning System"
+      }
+    ],
+
     title: 'Grim Farmlore',
     category: 'game',
     visual: 'farmlore',
     eyebrow: 'Dark fantasy · Farming RPG · University project',
-    timeframe: 'University team project',
-    role: 'Gameplay, UI & dialogue programming · Five-person team',
+    timeframe: '5-week university project',
+    role: 'Gameplay, UI & dialogue programming · Three-person team',
     stack: ['Unity', 'C#', 'Ink', 'Android'],
-    summary:
-      'A dark-fantasy mobile farming RPG that combines village life, exploration, dialogue and monster encounters.',
+    summary: "Grim Farmlore is a dark fantasy mobile game that combines RPG mechanics with farming simulation. Players cultivate a cursed farm, interact with NPCs, and explore a rich, story-driven world filled with mystery, combat, and choices that shape their journey.",
     lead:
       'Farming and storytelling meet a darker world of mysteries, encounters and character interactions.',
     context:
-      'Grim Farmlore is a pixel-art RPG and farming simulation developed as an academic Android project by a five-person team. Its world connects farm management, village characters, dark-forest exploration, enemies and story-driven interactions.',
+      'Grim Farmlore is a pixel-art RPG and farming simulation developed as an academic Android project by a three-person team. Its world connects farm management, village characters, dark-forest exploration, enemies and story-driven interactions.',
     challenge:
       'Bring together a number of everyday gameplay interactions and narrative moments without losing coherence as the player moves among scenes and characters.',
     systems: [
@@ -186,15 +268,39 @@ export const projects: Project[] = [
   },
   {
     slug: 'tic-tac-toe',
+    coverImage: "https://static.wixstatic.com/media/2e665a_6bd7a3505ee1498f8220b155cfae9378~mv2.gif",
+    coverAlt: "Tic Tac Toe original Wix portfolio cover artwork",
+    teamSize: 1,
+    wixOriginal: {
+      "subtitle": "Puzzle - University - 2 Weeks",
+      "idea": "The goal was to reimagine the classic Tic-Tac-Toe game with a fun, thematic twist. I chose a playful Space Party theme to add personality and visual interest, while still focusing on clean mechanics and mobile-friendly interaction. The idea was to make a simple game feel dynamic and polished through animation, sound, and cohesive design.",
+      "concept": "As part of a university assignment, I developed a mobile-friendly Tic-Tac-Toe game with a cohesive Space theme. The goal was to create an engaging user experience using consistent visuals and smooth animations, bringing a playful twist to a classic game through stylized graphics and animated UI transitions.",
+      "myRole": "I was solely responsible for the entire project, handling everything from concept to completion. I designed and developed the game using Unity for implementation and Photoshop for creating all visual assets.",
+      "sourcePage": "https://jaanekkerma.wixsite.com/portfolio/my-projects/tic-tac-toe"
+    },
+    gallery: [
+      {
+        "title": "UI Animation & Game Logic Integration in Unity",
+        "description": "This screenshot showcases my implementation of animated UI transitions using Unity’s Animator and Timeline systems. I programmed custom game state logic to control panel visibility (e.g., Game Over, Restart, Choose a Side) and tied animations to these transitions via code. I structured the UI hierarchy and animations programmatically to ensure smooth, responsive user feedback throughout gameplay.",
+        "url": "https://static.wixstatic.com/media/2e665a_be27748f4cae4052b590ff007dfaa92c~mv2.jpg",
+        "alt": "UI Animation & Game Logic Integration in Unity"
+      },
+      {
+        "title": "Main Menu Screen – UI Setup & Player Selection",
+        "description": "This image shows the main menu screen where players select their side. I implemented the UI logic and transitions using Unity’s Animator system, and scripted the interaction to connect player choice with game state initialization. The visual layout and functionality were fully designed and programmed by me to support a cohesive user experience within the space-themed interface.",
+        "url": "https://static.wixstatic.com/media/2e665a_6d2f732bb84e4bbf8710abdfa5c96a75~mv2.png",
+        "alt": "Main Menu Screen – UI Setup & Player Selection"
+      }
+    ],
+
     title: 'Tic Tac Toe',
     category: 'game',
     visual: 'tictactoe',
     eyebrow: 'Unity · Mobile UI · University project',
     timeframe: '2-week university project',
-    role: 'Solo developer',
+    role: 'Solo developer · Concept to completion',
     stack: ['Unity', 'C#', 'Photoshop'],
-    summary:
-      'A space-themed, mobile-optimized take on a classic game, with custom visual assets and animated UI.',
+    summary: "A mobile-optimized Tic-Tac-Toe game created as a university assignment, featuring a cohesive Space theme and playful animated UI. \n\nI designed and developed the entire project solo, using Unity for gameplay mechanics and interface logic, and Photoshop for all custom visual assets.",
     lead:
       'A small project focused on the details that make a familiar interaction feel cohesive.',
     context:

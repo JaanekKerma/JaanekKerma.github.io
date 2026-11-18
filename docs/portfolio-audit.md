@@ -106,3 +106,9 @@ All fields can be optional where data is unavailable. Astro content collections 
 ## 8. Immediate next step
 
 Review [design-directions.md](./design-directions.md), choose the preferred aesthetic, and build its homepage and project page as a first design iteration on `develop`. Retain the existing Wix portfolio until publication.
+
+## Direct connected Wix CMS recovery
+
+On 2026-11-18, the authenticated Wix connection returned the complete `MyProjects` CMS collection (4 records), original role statements, team sizes, original project copy, cover media, and eight gallery entries with captions. Astro uses these original descriptive fields as source data and displays the public Wix image URLs. Original binary media files should be copied into the GitHub repo in a subsequent archival pass to remove the external Wix dependency. Source site is unchanged.
+
+Confirmed Wix team sizes: Takstrid 2, Site Zero 9, Tic Tac Toe 1, Grim Farmlore 3. This supersedes the previous unverified team sizes.

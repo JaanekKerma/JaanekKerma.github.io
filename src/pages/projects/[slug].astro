@@ -38,8 +38,8 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
         <div class="detail-right-marker" aria-hidden="true">PROJECT<br />DETAILS <span>↗</span></div>
       </div>
       <div class="detail-visual">
-        <ProjectVisual variant={project.visual} large />
-        <div class="detail-image-caption"><span>VISUAL STUDY / REPRESENTATIVE ARTWORK</span><span>{project.category === 'game' ? 'GAME DEVELOPMENT' : 'SOFTWARE ENGINEERING'}</span></div>
+        {project.coverImage ? <img class="detail-hero-image" src={project.coverImage} alt={project.coverAlt ?? project.title} decoding="async" /> : <ProjectVisual variant={project.visual} large />}
+        <div class="detail-image-caption"><span>{project.coverImage ? 'ORIGINAL WIX PORTFOLIO MEDIA' : 'ILLUSTRATIVE VISUAL STUDY'}</span><span>{project.category === 'game' ? 'GAME DEVELOPMENT' : 'SOFTWARE ENGINEERING'}</span></div>
       </div>
     </header>
 
@@ -75,8 +75,28 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
             ))}
           </div>
         </section>
+        {project.gallery && project.gallery.length > 0 && (
+          <section class="detail-section project-gallery-section">
+            <span class="section-eyebrow">04 / ORIGINAL PROJECT MEDIA</span>
+            <h2>Implementation gallery.</h2>
+            <p>Images and descriptions preserved from the original Wix portfolio.</p>
+            <div class="case-gallery">
+              {project.gallery.map((image) => (
+                <figure class="case-gallery-item">
+                  <a href={image.url} target="_blank" rel="noopener noreferrer" aria-label={'Open full image: ' + image.title}>
+                    <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
+                  </a>
+                  <figcaption>
+                    <strong>{image.title}</strong>
+                    {image.description && <p>{image.description}</p>}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
         <section class="detail-section">
-          <span class="section-eyebrow">04 / ADDITIONAL NOTES</span>
+          <span class="section-eyebrow">05 / ADDITIONAL NOTES</span>
           <h2>Further details.</h2>
           <ul class="detail-notes">
             {project.notes.map((note) => <li>{note}</li>)}
@@ -93,7 +113,7 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
           </div>
           <div class="detail-aside-rule"></div>
           <span class="aside-label">PROJECT NOTE</span>
-          <p class="aside-note">This is a first case-study design iteration. Artwork is illustrative; original screenshots, deeper code analysis, and final copy can be added during the content migration.</p>
+          <p class="aside-note">This is a first case-study design iteration. Project media and original descriptive captions were sourced from the Wix portfolio. The media is temporarily served from Wix while local asset archival is completed.</p>
           <a class="text-link" href={sitePath("projects/")}>← All projects</a>
         </div>
       </aside>

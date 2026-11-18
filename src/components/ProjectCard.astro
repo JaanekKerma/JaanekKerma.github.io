@@ -12,7 +12,9 @@ const { project, index, prominent = false } = Astro.props;
 ---
 <article class={'project-card' + (prominent ? ' project-card--prominent' : '')}>
   <a class="project-card__visual" href={sitePath('projects/' + project.slug + '/')} aria-label={'Read about ' + project.title}>
-    <ProjectVisual variant={project.visual} />
+    {project.coverImage ? (
+      <img class="project-image" src={project.coverImage} alt={project.coverAlt ?? project.title} loading="lazy" decoding="async" />
+    ) : <ProjectVisual variant={project.visual} />}
     <span class="visual-link-indicator" aria-hidden="true">↗</span>
   </a>
   <div class="project-card__body">
