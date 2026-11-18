@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { sitePath } from '../utils/paths';
+import { projects } from '../data/projects';
 
 interface Props {
   title: string;
@@ -10,6 +11,8 @@ interface Props {
 const { title, description, type = 'website' } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const onProjects = Astro.url.pathname.startsWith(sitePath('projects/'));
+const onContact = Astro.url.pathname.startsWith(sitePath('contact/'));
+const onHome = Astro.url.pathname === sitePath('');
 const isPreview = import.meta.env.BASE_URL.includes('/preview/');
 ---
 <!doctype html>
@@ -38,14 +41,52 @@ const isPreview = import.meta.env.BASE_URL.includes('/preview/');
           <span class="brand-symbol">J<span>K</span><span class="brand-point">.</span></span>
           <span class="brand-copy"><strong>JAANEK KERMA</strong><small>GAME & SOFTWARE DEVELOPMENT</small></span>
         </a>
-        <nav class="main-nav" aria-label="Main navigation">
-          <a href={sitePath("projects/")} aria-current={onProjects ? 'page' : undefined}>Projects</a>
-          <a href={sitePath("#expertise")}>Expertise</a>
-          <a href={sitePath("#about")}>About</a>
-          <a class="nav-contact" href="mailto:jaanek.kerma@gmail.com">Let's talk <span aria-hidden="true">↗</span></a>
-        </nav>
+        <div class="header-actions">
+          <nav class="main-nav" aria-label="Primary navigation">
+            <a href={sitePath("projects/")} aria-current={onProjects ? 'page' : undefined}>Projects</a>
+            <a href={sitePath("#expertise")}>Expertise</a>
+            <a href={sitePath("#about")}>About</a>
+            <a class="nav-contact" href={sitePath("contact/")} aria-current={onContact ? 'page' : undefined}>Let's talk <span aria-hidden="true">↗</span></a>
+          </nav>
+          <button class="menu-trigger" type="button" data-menu-trigger aria-controls="site-drawer" aria-expanded="false" aria-label="Open navigation menu">
+            <span class="menu-trigger-copy">Menu</span>
+            <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
+          </button>
+        </div>
       </div>
     </header>
+    <div class="site-drawer" id="site-drawer" data-site-drawer hidden>
+      <button class="drawer-backdrop" type="button" data-drawer-close tabindex="-1" aria-label="Close navigation menu"></button>
+      <aside class="drawer-panel" data-drawer-panel role="dialog" aria-modal="true" aria-label="Explore the portfolio">
+        <div class="drawer-head">
+          <span class="section-eyebrow">JAANEK KERMA / NAVIGATION</span>
+          <button class="drawer-close" type="button" data-drawer-close aria-label="Close navigation menu"><span aria-hidden="true">×</span> Close</button>
+        </div>
+        <nav class="drawer-navigation" aria-label="Expanded navigation">
+          <div class="drawer-group-label">01 / EXPLORE</div>
+          <a class="drawer-primary-link" href={sitePath("")} aria-current={onHome ? 'page' : undefined}><span>Homepage</span><span aria-hidden="true">↗</span></a>
+          <a class="drawer-primary-link" href={sitePath("#work")}><span>Featured projects</span><span aria-hidden="true">↗</span></a>
+          <a class="drawer-primary-link" href={sitePath("#expertise")}><span>Expertise</span><span aria-hidden="true">↗</span></a>
+          <a class="drawer-primary-link" href={sitePath("#about")}><span>About</span><span aria-hidden="true">↗</span></a>
+          <a class="drawer-primary-link" href={sitePath("projects/")} aria-current={onProjects ? 'page' : undefined}><span>All projects</span><span aria-hidden="true">↗</span></a>
+          <a class="drawer-primary-link" href={sitePath("contact/")} aria-current={onContact ? 'page' : undefined}><span>Let's talk / Contact</span><span aria-hidden="true">↗</span></a>
+          <div class="drawer-group-label drawer-project-label">02 / PROJECT INDEX</div>
+          <div class="drawer-project-list">
+            {projects.map((project, index) => (
+              <a href={sitePath("projects/" + project.slug + "/")}>
+                <span class="drawer-project-index">{String(index + 1).padStart(2, "0")}</span>
+                <span>{project.title}</span>
+                <span class="drawer-project-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        </nav>
+        <div class="drawer-foot">
+          <span>GAMES, SYSTEMS & SOFTWARE</span>
+          <a href={sitePath("contact/")}>Start a conversation <span aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
+    </div>
     <main id="main-content"><slot /></main>
     <footer class="site-footer">
       <div class="shell footer-inner">
@@ -54,10 +95,61 @@ const isPreview = import.meta.env.BASE_URL.includes('/preview/');
         <div class="footer-socials" aria-label="Professional profiles">
           <a href="https://github.com/Ruscemp" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           <a href="https://www.linkedin.com/in/jaanek-kerma-257383190/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-          <a href="mailto:jaanek.kerma@gmail.com">Email ↗</a>
+          <a href={sitePath("contact/")}>Contact ↗</a>
         </div>
       </div>
       <div class="shell footer-bottom"><span>© {new Date().getFullYear()} Jaanek Kerma</span><span>Built with Astro · Hosted on GitHub Pages</span></div>
     </footer>
+    <script>
+      const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-trigger]');
+      const drawer = document.querySelector<HTMLElement>('[data-site-drawer]');
+      const panel = document.querySelector<HTMLElement>('[data-drawer-panel]');
+      let previousFocus: HTMLElement | null = null;
+      const focusableItems = () => panel ? Array.from(panel.querySelectorAll<HTMLElement>('a[href],button:not([disabled]):not([tabindex="-1"])')) : [];
+
+      const closeDrawer = () => {
+        if (!drawer || drawer.hidden) return;
+        drawer.hidden = true;
+        document.body.classList.remove('drawer-is-open');
+        menuButton?.setAttribute('aria-expanded', 'false');
+        menuButton?.setAttribute('aria-label', 'Open navigation menu');
+        (previousFocus ?? menuButton)?.focus();
+      };
+
+      const openDrawer = () => {
+        if (!drawer) return;
+        previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        drawer.hidden = false;
+        document.body.classList.add('drawer-is-open');
+        menuButton?.setAttribute('aria-expanded', 'true');
+        menuButton?.setAttribute('aria-label', 'Close navigation menu');
+        panel?.querySelector<HTMLElement>('.drawer-close')?.focus();
+      };
+
+      menuButton?.addEventListener('click', () => drawer?.hidden ? openDrawer() : closeDrawer());
+      drawer?.querySelectorAll<HTMLElement>('[data-drawer-close]').forEach(button => button.addEventListener('click', closeDrawer));
+      drawer?.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => link.addEventListener('click', closeDrawer));
+      document.addEventListener('keydown', (event) => {
+        if (!drawer || drawer.hidden) return;
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeDrawer();
+          return;
+        }
+        if (event.key !== 'Tab') return;
+        const focusables = focusableItems();
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+      window.addEventListener('popstate', closeDrawer);
+    </script>
   </body>
 </html>
