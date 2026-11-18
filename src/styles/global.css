@@ -815,3 +815,15 @@ html { scroll-padding-top: 82px; }
   .behind-code-hub .expertise-icon { grid-column: 1; grid-row: 2 / 4; }
   .contact-inner { padding-block: 67px 75px; }
 }
+
+/* Refinement 04: preserve scroll on drawer close and correct anchor alignment. */
+html { scrollbar-gutter: stable; }
+#work { scroll-margin-top: 124px; }
+.hero { padding-top: 64px; }
+@media (min-width: 1450px) {
+  .hero { padding-top: 82px; }
+}
+@media (max-width: 690px) {
+  #work { scroll-margin-top: 102px; }
+  .hero { padding-top: 40px; }
+}

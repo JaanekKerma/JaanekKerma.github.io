@@ -161,24 +161,44 @@ const isPreview = import.meta.env.BASE_URL.includes('/preview/');
         });
       });
 
+      // Lock the page at its current scroll position while the drawer is open.
+      // Restoring focus with preventScroll avoids a surprise jump on backdrop click.
+      let savedScrollY = 0;
       const closeDrawer = () => {
         if (!drawer || drawer.hidden) return;
         drawer.hidden = true;
         submenuToggles.forEach((button) => setSubmenuOpen(button, false));
         document.body.classList.remove('drawer-is-open');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.width = '';
         menuButton?.setAttribute('aria-expanded', 'false');
         menuButton?.setAttribute('aria-label', 'Open navigation menu');
-        (previousFocus ?? menuButton)?.focus();
+        // The site normally uses smooth scrolling for anchors, but closing the
+        // overlay must restore the exact scroll position instantly.
+        const root = document.documentElement;
+        const previousScrollBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = 'auto';
+        window.scrollTo(0, savedScrollY);
+        root.style.scrollBehavior = previousScrollBehavior;
+        const destination = previousFocus?.isConnected ? previousFocus : menuButton;
+        destination?.focus({ preventScroll: true });
       };
 
       const openDrawer = () => {
-        if (!drawer) return;
+        if (!drawer || !drawer.hidden) return;
+        savedScrollY = window.scrollY;
         previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-        drawer.hidden = false;
+        document.body.style.top = '-' + savedScrollY + 'px';
+        document.body.style.left = '0';
+        document.body.style.width = '100%';
+        document.body.style.position = 'fixed';
         document.body.classList.add('drawer-is-open');
+        drawer.hidden = false;
         menuButton?.setAttribute('aria-expanded', 'true');
         menuButton?.setAttribute('aria-label', 'Close navigation menu');
-        panel?.querySelector<HTMLElement>('.drawer-close')?.focus();
+        panel?.querySelector<HTMLElement>('.drawer-close')?.focus({ preventScroll: true });
       };
 
       menuButton?.addEventListener('click', () => drawer?.hidden ? openDrawer() : closeDrawer());
