@@ -29,6 +29,22 @@ For GitHub Pages preview deployment, set **Settings → Pages → Build and depl
 
 The separate production deployment workflow is configured to publish **only from `main`**, after we deliberately merge the approved site. The single GitHub Pages domain can only have one active deployment at a time; before production launch, we will combine root production and the `/preview/` build into a single Pages artifact to preserve both environments.
 
+## Browser-based preview (no local installation)
+
+Open the `develop` branch on StackBlitz:
+
+https://stackblitz.com/github/JaanekKerma/JaanekKerma.github.io/tree/develop
+
+StackBlitz imports the public GitHub branch and starts the Astro development server. Its editor contains a live browser preview. This is an **alternative** to a hosted Pages preview and depends on StackBlitz's browser compatibility; it is not the permanent published site.
+
+To activate the separately hosted GitHub Pages preview, GitHub currently requires a one-time repository setting because its Pages source branch is limited to `main`:
+
+1. Repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. If necessary, allow `develop` in the `portfolio-preview` environment's deployment branch rules under **Settings → Environments**.
+3. Re-run **Publish develop preview** from GitHub Actions, or push the next `develop` commit.
+
+When enabled, the hosted preview is `https://jaanekkerma.github.io/preview/`. Note that publishing Pages from this repository will replace the currently served root page with a temporary landing page, while leaving the **main branch source files unchanged**.
+
 ## Preview validation
 
 ```bash
