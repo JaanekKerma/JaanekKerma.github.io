@@ -25,7 +25,13 @@ Source: the existing Wix homepage as rendered in an authenticated browser tab on
 
 ### Previously identified portfolio projects needing full-page verification
 
-Earlier exploration identified **Takstrid** and **Grim Farmlore** as additional projects. Their detailed descriptions, roles, tech stacks, and asset rights **have not been reconfirmed during this audit**. Do not publish invented technical details.
+**Migrated on 2026-11-18:** the public Wix gallery's four previously identified projects are Site Zero, Takstrid, Grim Farmlore, and Tic Tac Toe. All four now have Astro detail routes, alongside the newer Fortune's Gate project.
+
+- **Takstrid** — Unreal/C++ audio-only action/horror university game for blind players. The user's earlier descriptions confirm audio-first environmental navigation and personal involvement with sound. Source: [Wix project page](https://jaanekkerma.wixsite.com/portfolio/my-projects/takstrid).
+- **Grim Farmlore** — Unity/C#/Ink dark-fantasy mobile farming RPG, developed with a five-person student team. Earlier descriptions confirm contributions to menu, dialogue, interactables, spawning, scene logic, and bug fixes. Source: earlier user project descriptions and [Wix project gallery](https://jaanekkerma.wixsite.com/portfolio/my-projects).
+- **Site Zero** and **Tic Tac Toe** — existing Astro entries migrated from the Wix homepage and linked project pages.
+
+**Migration limitation:** this pass covers game-project entries and descriptions, not original Wix media files or an exhaustive word-for-word export of each dynamic Wix page. Those project page assets could not be retrieved reliably from the public Wix site in the current environment. The website uses clearly illustrative vector artwork until real assets can be migrated. Do not claim the Wix media has been moved.
 
 ### Known content updates / accuracy flags
 

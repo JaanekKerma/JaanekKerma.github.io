@@ -1,4 +1,4 @@
-export type ProjectVisual = 'fortune' | 'arena' | 'tictactoe';
+export type ProjectVisual = 'fortune' | 'arena' | 'takstrid' | 'farmlore' | 'tictactoe';
 export type ProjectCategory = 'game' | 'software';
 
 export interface Project {
@@ -93,6 +93,94 @@ export const projects: Project[] = [
     notes: ['Technical implementation details and individual team responsibilities still need verification before final publication.'],
     links: [
       { label: 'Original project page', href: 'https://jaanekkerma.wixsite.com/portfolio/my-projects/unreal-shooter', primary: true },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'takstrid',
+    title: 'Takstrid',
+    category: 'game',
+    visual: 'takstrid',
+    eyebrow: 'Audio-first · Action / horror · University project',
+    timeframe: 'University game project',
+    role: 'Audio implementation · Team project',
+    stack: ['Unreal Engine', 'C++', 'Spatial audio', 'Accessibility'],
+    summary:
+      'An audio-only action-horror experience designed to be navigable and playable without sight.',
+    lead:
+      'When visuals cannot carry information, sound needs to become the interface, the feedback, and the world itself.',
+    context:
+      'Takstrid is a university game project built in Unreal Engine with C++. It was designed for players who cannot rely on visual cues, including blind players: orientation, threats, and interaction are communicated through sound instead of conventional graphics.',
+    challenge:
+      'Help players navigate and understand their surroundings without visual indicators, while preserving tension, precision, and a fair sense of agency.',
+    systems: [
+      {
+        title: 'Audio as navigation',
+        description:
+          'Directional ambient landmarks such as a road, forest and waterfall, together with changes in wind, help communicate orientation and environmental boundaries.',
+      },
+      {
+        title: 'Enemy presence and danger',
+        description:
+          'Breathing, footsteps, roars and a heartbeat convey the monster’s direction, distance or proximity, building suspense through the soundscape.',
+      },
+      {
+        title: 'Action without a visual HUD',
+        description:
+          'Movement, obstacles and weapon use depend on audible feedback, allowing the player to make choices from the information the game provides through sound.',
+      },
+    ],
+    notes: [
+      'The experience was conceived without reliance on graphics, rather than as a conventional visually driven game with optional audio.',
+      'My work involved sound implementation within the Unreal/C++ project.',
+      'The original Wix portfolio includes this project; gameplay media and detailed team credits are pending migration.',
+    ],
+    links: [
+      { label: 'Original Wix project page', href: 'https://jaanekkerma.wixsite.com/portfolio/my-projects/takstrid', primary: true },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'grim-farmlore',
+    title: 'Grim Farmlore',
+    category: 'game',
+    visual: 'farmlore',
+    eyebrow: 'Dark fantasy · Farming RPG · University project',
+    timeframe: 'University team project',
+    role: 'Gameplay, UI & dialogue programming · Five-person team',
+    stack: ['Unity', 'C#', 'Ink', 'Android'],
+    summary:
+      'A dark-fantasy mobile farming RPG that combines village life, exploration, dialogue and monster encounters.',
+    lead:
+      'Farming and storytelling meet a darker world of mysteries, encounters and character interactions.',
+    context:
+      'Grim Farmlore is a pixel-art RPG and farming simulation developed as an academic Android project by a five-person team. Its world connects farm management, village characters, dark-forest exploration, enemies and story-driven interactions.',
+    challenge:
+      'Bring together a number of everyday gameplay interactions and narrative moments without losing coherence as the player moves among scenes and characters.',
+    systems: [
+      {
+        title: 'Dialogue and narrative integration',
+        description:
+          'I integrated the Ink dialogue system with Unity and worked on dialogue/story content and interactions with NPCs.',
+      },
+      {
+        title: 'Interactive game world',
+        description:
+          'I implemented and refined interactions involving doors, beds, character conversations, and visibility effects such as roof fading.',
+      },
+      {
+        title: 'Scene and gameplay flow',
+        description:
+          'My contributions included scene layout and management, randomized enemy spawning, main-menu behavior and effects, audio integration, and bug fixing.',
+      },
+    ],
+    notes: [
+      'Created for Android using Unity and C#.',
+      'My individual contributions are described separately from the overall team-developed game concept.',
+      'Original project screenshots and media are not yet embedded in this Astro version.',
+    ],
+    links: [
+      { label: 'Original Wix project gallery', href: 'https://jaanekkerma.wixsite.com/portfolio/my-projects', primary: true },
     ],
     featured: true,
   },

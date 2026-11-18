@@ -61,3 +61,14 @@ Review feedback: the overall direction is good, but the nearly-black palette fee
 Changes: lift background surfaces into dark slate-blue, improve secondary-text contrast, and strengthen card and section separation. Keep the pale-green accent, typographic system, page architecture, and project artworks unchanged. This is a conservative refinement, not a new design direction.
 
 Next: replace illustrative visuals with actual approved project media and continue factual case-study enrichment. Keep private employer/client projects excluded.
+
+## Wix portfolio project migration — 2026-11-18
+
+- Portfolio gallery: four legacy entries — Site Zero, Takstrid, Grim Farmlore, and Tic Tac Toe.
+- Newer addition: Fortune's Gate. Five total projects and Astro case-study pages.
+- Each page uses the same typed project-data template and has a distinct representative visual.
+- Takstrid is an audio-first Unreal/C++ student project; user contributions involve sound.
+- Grim Farmlore is a Unity/C#/Ink dark-fantasy mobile RPG from a five-person student team; the user contributed menu, dialogue, interactions, scene/gameplay systems, enemy spawning, and bug fixing.
+- The two new visuals are abstract/illustrative, **not** original gameplay screenshots.
+- Migrating original Wix screenshots and any additional detailed copy remains to be done; do not represent the current version as a complete asset transfer.
+- Employer work remains excluded.

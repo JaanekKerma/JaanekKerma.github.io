@@ -7,6 +7,8 @@ const required = [
   'projects/index.html',
   'projects/fortunes-gate/index.html',
   'projects/site-zero/index.html',
+  'projects/takstrid/index.html',
+  'projects/grim-farmlore/index.html',
   'projects/tic-tac-toe/index.html',
   'favicon.svg',
 ];
@@ -37,4 +39,4 @@ for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
-console.log('Preview verified: 5 pages, forbidden project absent, favicon, scoped links, and noindex metadata.');
+console.log('Preview verified: 7 pages, forbidden project absent, favicon, scoped links, and noindex metadata.');

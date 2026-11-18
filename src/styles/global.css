@@ -367,3 +367,24 @@ p { line-height: 1.72; }
 }
 .preview-banner strong { color: var(--lime); letter-spacing: .06em; }
 .preview-banner span { color: #d2dfcd; }
+
+/* Completed Wix game-portfolio migration: five selected projects.
+   Balance a two-column case-study grid around the full-width flagship. */
+.visual-takstrid { background: radial-gradient(ellipse at 48% 52%, #334c59, #192b37 82%); }
+.visual-farmlore { background: radial-gradient(ellipse at 50% 53%, #596950, #253b3c 78%); }
+.featured-grid--home { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.featured-grid--home > .project-card--prominent { grid-column: 1 / -1; }
+@media (max-width: 900px) {
+  .featured-grid--home > .project-card:last-child {
+    grid-column: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .featured-grid--home > .project-card:last-child > .project-card__visual {
+    min-height: 0;
+  }
+}
+@media (max-width: 680px) {
+  .featured-grid--home { grid-template-columns: 1fr; }
+  .featured-grid--home > .project-card:last-child { grid-column: auto; }
+}

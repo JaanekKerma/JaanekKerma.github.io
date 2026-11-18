@@ -10,6 +10,8 @@ const labels: Record<VisualType, string> = {
   fortune: 'Abstract diagram of number entities flowing through arithmetic gates',
   arena: 'Abstract tactical arena diagram with targeting reticle',
   tictactoe: 'Stylized tic-tac-toe board floating in a starfield',
+  takstrid: 'Illustrative sound-wave interface describing audio-first navigation',
+  farmlore: 'Stylized pixel-art farm and dark forest scene with player and monster',
 };
 ---
 <div class={'project-visual visual-' + variant + (large ? ' visual-large' : '')} role="img" aria-label={labels[variant]}>
@@ -59,6 +61,80 @@ const labels: Record<VisualType, string> = {
         <circle cx="156" cy="240" r="7" fill="#EC937B"/><circle cx="483" cy="224" r="7" fill="#D4EC96"/>
       </svg>
       <span class="visual-bottomline" aria-hidden="true">1 V 1 / ELECTRUM ZONE</span>
+    </>
+  )}
+  {variant === 'takstrid' && (
+    <>
+      <span class="visual-topline" aria-hidden="true">TAK / AUDIO_WORLD</span>
+      <svg class="visual-svg" viewBox="0 0 640 400" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="takstrid-fog">
+            <stop offset="0" stop-color="#506678" stop-opacity=".55"/>
+            <stop offset="1" stop-color="#192936" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="330" cy="195" rx="230" ry="165" fill="url(#takstrid-fog)"/>
+        <path d="M70 370L203 170M570 370L437 170" stroke="#7A9DA5" stroke-width="2" stroke-opacity=".4"/>
+        <path d="M106 370L241 178M530 370L399 178" stroke="#71929A" stroke-opacity=".28"/>
+        <g stroke="#A1E8D1" stroke-width="2" stroke-opacity=".6">
+          <circle cx="320" cy="206" r="48"/>
+          <circle cx="320" cy="206" r="90" stroke-dasharray="5 9"/>
+          <circle cx="320" cy="206" r="137" stroke-opacity=".45"/>
+          <circle cx="320" cy="206" r="182" stroke-opacity=".24"/>
+        </g>
+        <path d="M60 209h68l17-25 18 48 20-75 18 90 18-55 15 17h48" stroke="#C7FDE1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M375 206h43l14-32 20 60 15-82 22 100 18-47h70" stroke="#C7FDE1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".8"/>
+        <circle cx="320" cy="206" r="14" fill="#9CEFC9"/>
+        <path d="M306 206q14-25 28 0q-14 25-28 0Z" fill="#20313A"/>
+        <path d="M318 185l2-48m-2 90 2 48m-24-69h-45m92 0h44" stroke="#DCF7E2" stroke-width="1.5" stroke-opacity=".5"/>
+        <g font-family="monospace" fill="#BCEAD4" font-size="12" letter-spacing="2">
+          <text x="74" y="86">DIRECTIONAL AUDIO</text>
+          <text x="467" y="318">NO VISUAL HUD</text>
+        </g>
+        <g fill="#91C3A9" opacity=".65">
+          <circle cx="146" cy="110" r="3"/><circle cx="472" cy="97" r="4"/><circle cx="546" cy="271" r="3"/>
+        </g>
+      </svg>
+      <span class="visual-bottomline" aria-hidden="true">LISTEN → ORIENT → SURVIVE</span>
+    </>
+  )}
+  {variant === 'farmlore' && (
+    <>
+      <span class="visual-topline" aria-hidden="true">GF / DARK_FOREST</span>
+      <svg class="visual-svg" viewBox="0 0 640 400" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet" shape-rendering="crispEdges">
+        <path d="M0 342l112-117 91 60 117-163 102 126 89-62 129 132v82H0Z" fill="#293D44"/>
+        <path d="M0 371l154-109 89 49 114-125 91 78 98-59 94 124v71H0Z" fill="#385449"/>
+        <g fill="#1A3336">
+          <path d="M70 263l26-99 26 99ZM113 269l29-121 29 121ZM496 247l26-95 26 95ZM538 272l34-136 34 136Z"/>
+        </g>
+        <path d="M136 331l68-102 75 10 53 92Z" fill="#4B443F"/>
+        <path d="M125 238l111-100 113 100Z" fill="#A26358" stroke="#D8A280" stroke-width="4"/>
+        <rect x="159" y="239" width="162" height="92" fill="#6F5543" stroke="#AA8C6B" stroke-width="3"/>
+        <rect x="213" y="268" width="54" height="63" fill="#283E42" stroke="#D7AB85" stroke-width="3"/>
+        <path d="M325 330h315" stroke="#7A9C68" stroke-width="9"/>
+        <g fill="#607749" stroke="#9ABC6C" stroke-width="4">
+          <rect x="28" y="310" width="84" height="33"/>
+          <rect x="352" y="309" width="74" height="34"/>
+          <rect x="448" y="309" width="64" height="34"/>
+        </g>
+        <g stroke="#B1C977" stroke-width="4">
+          <path d="M47 321v-27m15 29v-25m19 25v-29m18 29v-20"/>
+          <path d="M369 323v-25m20 25v-24m20 24v-27"/>
+          <path d="M467 321v-25m23 25v-24"/>
+        </g>
+        <g>
+          <rect x="395" y="271" width="18" height="26" fill="#DFD3AC"/>
+          <rect x="391" y="259" width="26" height="17" fill="#93B3A3"/>
+          <rect x="398" y="291" width="6" height="16" fill="#282E33"/>
+          <rect x="408" y="291" width="6" height="16" fill="#282E33"/>
+          <rect x="535" y="291" width="27" height="23" rx="4" fill="#8FD09E" stroke="#C6F4A6" stroke-width="3"/>
+          <circle cx="543" cy="302" r="3" fill="#223A36"/><circle cx="555" cy="302" r="3" fill="#223A36"/>
+        </g>
+        <g font-family="monospace" fill="#BFE0BB" font-size="12" letter-spacing="2">
+          <text x="63" y="83">VILLAGE / QUESTS</text><text x="449" y="113">FOREST / COMBAT</text>
+        </g>
+      </svg>
+      <span class="visual-bottomline" aria-hidden="true">FARM → EXPLORE → UNCOVER</span>
     </>
   )}
   {variant === 'tictactoe' && (
