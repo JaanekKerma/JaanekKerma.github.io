@@ -2,8 +2,10 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ProjectVisual from '../components/ProjectVisual.astro';
-import { featuredProjects } from '../data/projects';
+import { featuredProjects, projects } from '../data/projects';
 import { sitePath } from '../utils/paths';
+const [mainFeature, ...secondaryFeatures] = featuredProjects;
+const moreProjectCount = projects.length - featuredProjects.length;
 ---
 <SiteLayout title="Jaanek Kerma — Game & Software Developer" description="Portfolio of Jaanek Kerma, a C# developer creating game systems, interactive experiences, and practical software.">
   <section class="hero shell" aria-labelledby="hero-title">
@@ -16,7 +18,7 @@ import { sitePath } from '../utils/paths';
       </p>
       <div class="hero-actions">
         <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a>
-        <a class="button button-outline" href="mailto:jaanek.kerma@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
+        <a class="button button-outline" href={sitePath("contact/")}>Get in touch <span aria-hidden="true">↗</span></a>
       </div>
       <div class="hero-subline"><span class="availability-dot" aria-hidden="true"></span> Open to game programming, software development & testing opportunities</div>
     </div>
@@ -30,7 +32,7 @@ import { sitePath } from '../utils/paths';
       <div class="hero-orbit-tag tag-top">LOGIC<br />+1</div>
       <div class="hero-orbit-tag tag-bottom">3D / SYSTEMS</div>
     </div>
-    <div class="hero-index" aria-hidden="true">01 — 06 / SELECTED WORK</div>
+    <div class="hero-index" aria-hidden="true">01 — 03 / FEATURED PROJECTS</div>
   </section>
 
   <div class="full-rule"><div class="shell rule-inner"><span>THINK IN SYSTEMS</span><span class="rule-diamond">◇</span><span>BUILD WITH PURPOSE</span><span class="rule-diamond">◇</span><span>ITERATE THROUGH PLAY</span></div></div>
@@ -40,8 +42,16 @@ import { sitePath } from '../utils/paths';
       <div><div class="section-eyebrow">01 / SELECTED WORK</div><h2 id="work-title">Projects worth <em>exploring.</em></h2></div>
       <div class="section-heading-aside"><p>Selected game projects with the programming decisions and technical work behind each experience brought forward.</p><a class="text-link" href={sitePath("projects/")}>View all projects <span aria-hidden="true">↗</span></a></div>
     </div>
-    <div class="featured-grid featured-grid--home">
-      {featuredProjects.map((project, index) => <ProjectCard project={project} index={index} prominent={index === 0} />)}
+    <div class="home-project-spotlight">
+      {mainFeature && <ProjectCard project={mainFeature} index={0} prominent />}
+    </div>
+    <div class="home-project-support">
+      {secondaryFeatures.map((project, index) => <ProjectCard project={project} index={index + 1} />)}
+      <div class="home-project-more">
+        <span class="section-eyebrow">THE COMPLETE COLLECTION</span>
+        <p>{moreProjectCount} more game projects, from early experiments to completed university work.</p>
+        <a class="text-link" href={sitePath("projects/")}>Browse all six projects <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </section>
 
@@ -72,7 +82,7 @@ import { sitePath } from '../utils/paths';
   <section class="contact-zone" aria-labelledby="contact-title">
     <div class="shell contact-inner">
       <div><div class="section-eyebrow">04 / LET'S CONNECT</div><h2 id="contact-title">Have a problem<br />worth <em>solving?</em></h2></div>
-      <div class="contact-action"><p>I'm interested in programming roles across games, software, and testing. I'd love to hear about what you're building.</p><a class="button button-dark" href="mailto:jaanek.kerma@gmail.com">Send an email <span aria-hidden="true">↗</span></a></div>
+      <div class="contact-action"><p>I'm interested in programming roles across games, software, and testing. I'd love to hear about what you're building.</p><a class="button button-dark" href={sitePath("contact/")}>Let’s talk <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 </SiteLayout>

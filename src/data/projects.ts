@@ -253,7 +253,7 @@ export const projects: Project[] = [
       'The gallery includes original interface and implementation captures.',
     ],
     links: [],
-    featured: true,
+    featured: false,
   },
   {
     slug: 'tic-tac-toe',
@@ -301,7 +301,7 @@ export const projects: Project[] = [
     ],
     notes: ['The project gallery documents UI interactions and visual design.'],
     links: [],
-    featured: true,
+    featured: false,
   },
 
   {
@@ -328,7 +328,7 @@ export const projects: Project[] = [
       'The illustration shown here is representative artwork, not an in-game screenshot.',
     ],
     links: [{ label: 'Play in browser', href: 'https://ruscemp.itch.io/ninja-frog-saga', primary: true }],
-    featured: true,
+    featured: false,
   },
 ];
 
