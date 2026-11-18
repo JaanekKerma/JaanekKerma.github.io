@@ -1,0 +1,211 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+import { projectCollections, projectDiscovery } from '../../data/projectDiscovery';
+
+const collections = projectCollections.map((collection) => ({
+  ...collection,
+  items: projects.filter((project) => projectDiscovery[project.slug]?.collection === collection.id),
+}));
+const filterTags = [
+  'Solo', 'Team', 'Unity', 'Unreal',
+  'FPS', 'First Person', '2D', '3D',
+  'RPG', 'Horror', 'Platformer', 'UI',
+];
+---
+<SiteLayout
+  title="Projects — Jaanek Kerma"
+  description="Browse game jam and university programming projects by Jaanek Kerma. Search by name, technologies, role, and tags."
+  navItems={[
+    { label: 'Top', id: 'projects-overview' },
+    { label: 'Search & Filter', id: 'project-search' },
+    { label: 'Gallery', id: 'projects-gallery' },
+  ]}
+>
+  <section id="projects-overview" class="listing-hero shell">
+    <div class="section-eyebrow">PORTFOLIO / ALL PROJECTS</div>
+    <h1>Selected <em>work.</em></h1>
+    <p>Game jams, university assignments and collaborative projects — grouped by origin, with searchable tools, mechanics and roles.</p>
+    <div class="project-filter-bar">
+      <span class="project-counter">{String(projects.length).padStart(2, '0')} PROJECTS / 02 COLLECTIONS</span>
+      <span class="project-counter">UNITY · UNREAL · GAMEPLAY · ENGINEERING</span>
+    </div>
+  </section>
+
+  <section id="project-search" class="shell project-discovery" data-project-discovery aria-label="Search and filter projects">
+    <div class="project-discovery-heading">
+      <div>
+        <span class="section-eyebrow">FIND A PROJECT / FILTERS</span>
+        <h2>Find what <em>interests you.</em></h2>
+      </div>
+      <p>Search project names, genres, technical skills, or roles — and narrow the results with categories and tags.</p>
+    </div>
+    <div class="project-search-form" data-discovery-controls hidden>
+      <label for="project-search-input" class="project-search-label">Search projects</label>
+      <div class="project-search-input-wrap">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8"/>
+          <path d="m16 16 5 5" stroke-linecap="round"/>
+        </svg>
+        <input
+          id="project-search-input"
+          type="search"
+          name="search"
+          placeholder="Search e.g. Site Zero, Unity, FPS, first person…"
+          autocomplete="off"
+          data-project-search
+          aria-describedby="project-filter-help"
+        />
+      </div>
+      <p class="project-search-hint" id="project-filter-help">Text search matches project names, tags, technologies and descriptions. Multiple selected tags must all match.</p>
+      <div class="project-filter-sets">
+        <div class="project-filter-row">
+          <span class="project-filter-title">COLLECTION</span>
+          <div class="project-filter-options" role="group" aria-label="Filter by project collection">
+            <button type="button" class="project-filter-chip" data-collection-filter="all" aria-pressed="true">All projects <span>{projects.length}</span></button>
+            <button type="button" class="project-filter-chip" data-collection-filter="game-jam" aria-pressed="false">Game Jam <span>{collections[0].items.length}</span></button>
+            <button type="button" class="project-filter-chip" data-collection-filter="university" aria-pressed="false">University <span>{collections[1].items.length}</span></button>
+          </div>
+        </div>
+        <div class="project-filter-row">
+          <span class="project-filter-title">TAGS</span>
+          <div class="project-filter-options" role="group" aria-label="Filter by tags">
+            {filterTags.map((tag) => (
+              <button type="button" class="project-filter-chip" data-tag-filter={tag.toLowerCase()} aria-pressed="false">{tag}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="project-search-footer">
+        <p class="project-results-count" data-results-count role="status" aria-live="polite">{projects.length} projects found</p>
+        <button type="button" class="project-clear-filters" data-clear-filters disabled>Clear filters <span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </section>
+
+  <div id="projects-gallery" class="shell project-collections" aria-label="Project gallery">
+    {collections.map((collection, collectionIndex) => (
+      <section class="project-collection" id={collection.id} data-collection-group={collection.id} aria-labelledby={'collection-title-' + collection.id}>
+        <div class="project-collection-heading">
+          <div>
+            <span class="section-eyebrow">{String(collectionIndex + 1).padStart(2, '0')} / PROJECT COLLECTION</span>
+            <h2 id={'collection-title-' + collection.id}>{collection.label}<span class="section-dot">.</span></h2>
+          </div>
+          <div class="project-collection-caption">
+            <p>{collection.description}</p>
+            <span data-group-count>{collection.items.length} {collection.items.length === 1 ? 'project' : 'projects'}</span>
+          </div>
+        </div>
+        <div class="featured-grid projects-grid project-collection-grid">
+          {collection.items.map((project, index) => (
+            <div
+              class="project-grid-item project-discovery-card"
+              data-project-item
+              data-collection={collection.id}
+              data-tags={projectDiscovery[project.slug].tags.join('|').toLowerCase()}
+              data-search={[
+                project.title,
+                project.eyebrow,
+                project.summary,
+                project.timeframe,
+                project.role,
+                project.stack.join(' '),
+                projectDiscovery[project.slug].tags.join(' '),
+                collection.label,
+              ].join(' ').toLowerCase()}
+            >
+              <ProjectCard project={project} index={index} tags={projectDiscovery[project.slug].tags.slice(0, 6)} />
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+    <div class="project-no-results" data-project-empty hidden>
+      <span class="section-eyebrow">NO MATCHING PROJECTS</span>
+      <h2>Nothing matches those filters.</h2>
+      <p>Try another search term, deselect a tag, or show all project collections.</p>
+      <button type="button" class="button button-outline" data-empty-clear>Show all projects <span aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+
+  <script>
+    const controls = document.querySelector<HTMLElement>('[data-discovery-controls]');
+    const queryInput = document.querySelector<HTMLInputElement>('[data-project-search]');
+    const projectItems = Array.from(document.querySelectorAll<HTMLElement>('[data-project-item]'));
+    const collectionGroups = Array.from(document.querySelectorAll<HTMLElement>('[data-collection-group]'));
+    const collectionButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-collection-filter]'));
+    const tagButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-tag-filter]'));
+    const resetButton = document.querySelector<HTMLButtonElement>('[data-clear-filters]');
+    const emptyResetButton = document.querySelector<HTMLButtonElement>('[data-empty-clear]');
+    const noResults = document.querySelector<HTMLElement>('[data-project-empty]');
+    const resultCounter = document.querySelector<HTMLElement>('[data-results-count]');
+    let activeCollection = 'all';
+    const activeTags = new Set<string>();
+
+    const normalize = (value: string) =>
+      value.toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[-_]/g, ' ')
+        .trim();
+
+    const updateProjects = () => {
+      const query = normalize(queryInput?.value ?? '');
+      const tokens = query.split(/\s+/).filter(Boolean);
+      let visible = 0;
+
+      for (const group of collectionGroups) {
+        const groupName = group.dataset.collectionGroup ?? '';
+        let groupVisible = 0;
+        for (const card of Array.from(group.querySelectorAll<HTMLElement>('[data-project-item]'))) {
+          const search = normalize(card.dataset.search ?? '');
+          const tags = (card.dataset.tags ?? '').split('|');
+          const matchingCollection = activeCollection === 'all' || activeCollection === groupName;
+          const matchingTerms = tokens.every((token) => search.includes(token));
+          const matchingTags = [...activeTags].every((tag) => tags.includes(tag));
+          const matches = matchingCollection && matchingTerms && matchingTags;
+          card.hidden = !matches;
+          if (matches) {
+            groupVisible++;
+            visible++;
+          }
+        }
+        group.hidden = groupVisible === 0;
+        const count = group.querySelector<HTMLElement>('[data-group-count]');
+        if (count) count.textContent = String(groupVisible) + (groupVisible === 1 ? ' project' : ' projects');
+      }
+
+      if (noResults) noResults.hidden = visible !== 0;
+      if (resultCounter) resultCounter.textContent = String(visible) + (visible === 1 ? ' project found' : ' projects found');
+      if (resetButton) resetButton.disabled = activeCollection === 'all' && activeTags.size === 0 && query.length === 0;
+      collectionButtons.forEach((button) => button.setAttribute('aria-pressed', String((button.dataset.collectionFilter ?? 'all') === activeCollection)));
+      tagButtons.forEach((button) => button.setAttribute('aria-pressed', String(activeTags.has(button.dataset.tagFilter ?? ''))));
+    };
+
+    const clearFilters = () => {
+      activeCollection = 'all';
+      activeTags.clear();
+      if (queryInput) queryInput.value = '';
+      updateProjects();
+    };
+
+    if (controls && queryInput) {
+      controls.hidden = false;
+      queryInput.addEventListener('input', updateProjects);
+      collectionButtons.forEach((button) => button.addEventListener('click', () => {
+        activeCollection = button.dataset.collectionFilter ?? 'all';
+        updateProjects();
+      }));
+      tagButtons.forEach((button) => button.addEventListener('click', () => {
+        const tag = button.dataset.tagFilter ?? '';
+        if (activeTags.has(tag)) activeTags.delete(tag);
+        else if (tag) activeTags.add(tag);
+        updateProjects();
+      }));
+      resetButton?.addEventListener('click', clearFilters);
+      emptyResetButton?.addEventListener('click', clearFilters);
+      updateProjects();
+    }
+  </script>
+</SiteLayout>

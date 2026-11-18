@@ -1,0 +1,101 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectVisual from '../components/ProjectVisual.astro';
+import { featuredProjects, projects } from '../data/projects';
+import { sitePath } from '../utils/paths';
+const [mainFeature, ...secondaryFeatures] = featuredProjects;
+const moreProjectCount = projects.length - featuredProjects.length;
+---
+<SiteLayout
+  title="Jaanek Kerma — Game & Software Developer"
+  description="Portfolio of Jaanek Kerma, a C# developer creating game systems, interactive experiences, and practical software."
+  navItems={[
+    { label: 'Main', id: 'intro' },
+    { label: 'Featured Work', id: 'work' },
+    { label: 'Behind the Code', id: 'behind-the-code' },
+  ]}
+>
+  <section id="intro" class="hero shell" aria-labelledby="hero-title">
+    <div class="hero-left">
+      <div class="eyebrow"><span class="eyebrow-line"></span> C# DEVELOPER / GAME SYSTEMS / SOFTWARE</div>
+      <h1 id="hero-title">Building systems.<br /><span class="headline-outline">Making them</span> <span class="headline-accent">playable.</span></h1>
+      <p class="hero-description">
+        I'm <strong>Jaanek Kerma</strong> — a programmer with experience in C# software development and game projects.
+        I like turning complicated problems into systems that feel intuitive to use.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a>
+        <a class="button button-outline" href={sitePath("contact/")}>Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-subline"><span class="availability-dot" aria-hidden="true"></span> Open to game programming, software development & testing opportunities</div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual-header"><span>FEATURED BUILD / 001</span><span class="online-dot" aria-hidden="true"></span></div>
+      <ProjectVisual variant="fortune" large />
+      <a class="hero-visual-footer" href={sitePath("projects/fortunes-gate/")}>
+        <div><span>UNITY · C# · 2026</span><strong>Fortune's Gate</strong></div>
+        <span class="circle-arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="hero-orbit-tag tag-top">LOGIC<br />+1</div>
+      <div class="hero-orbit-tag tag-bottom">3D / SYSTEMS</div>
+    </div>
+    <div class="hero-index" aria-hidden="true">01 — 03 / FEATURED PROJECTS</div>
+  </section>
+
+  <div class="full-rule"><div class="shell rule-inner"><span>THINK IN SYSTEMS</span><span class="rule-diamond">◇</span><span>BUILD WITH PURPOSE</span><span class="rule-diamond">◇</span><span>ITERATE THROUGH PLAY</span></div></div>
+
+  <section class="section-block shell" aria-labelledby="work-title">
+    <div id="work" class="section-heading">
+      <div><div class="section-eyebrow">01 / SELECTED WORK</div><h2 id="work-title">Projects worth <em>exploring.</em></h2></div>
+      <div class="section-heading-aside"><p>Selected game projects with the programming decisions and technical work behind each experience brought forward.</p><a class="text-link" href={sitePath("projects/")}>View all projects <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="home-project-spotlight">
+      {mainFeature && <ProjectCard project={mainFeature} index={0} prominent />}
+    </div>
+    <div class="home-project-support">
+      {secondaryFeatures.map((project, index) => <ProjectCard project={project} index={index + 1} />)}
+      <div class="home-project-more">
+        <span class="section-eyebrow">THE COMPLETE COLLECTION</span>
+        <p>{moreProjectCount} more game projects, from early experiments to completed university work.</p>
+        <a class="text-link" href={sitePath("projects/")}>Browse all six projects <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="behind-the-code" class="behind-code-hub" aria-label="Skills and background">
+    <div class="shell behind-code-grid">
+  <section id="expertise" class="expertise-zone" aria-labelledby="expertise-title">
+    <div class="shell">
+      <div class="section-heading section-heading--compact">
+        <div><div class="section-eyebrow">02 / MY TOOLBOX</div><h2 id="expertise-title">Where code meets <em>craft.</em></h2></div>
+        <p>From gameplay rules to useful interfaces, I focus on readable code and systems that have a clear job to do.</p>
+      </div>
+      <div class="expertise-grid">
+        <div class="expertise-item"><span class="expertise-number">/01</span><span class="expertise-icon" aria-hidden="true">⌘</span><h3>Gameplay & systems</h3><p>Rules, player interaction, progression, and the logic that connects them.</p><div class="expertise-tags">UNITY <span>·</span> C# <span>·</span> UNREAL</div></div>
+        <div class="expertise-item"><span class="expertise-number">/02</span><span class="expertise-icon" aria-hidden="true">⌁</span><h3>Software engineering</h3><p>Object-oriented design, maintainable applications, and engineering beyond games.</p><div class="expertise-tags">C# <span>·</span> JAVA <span>·</span> C++</div></div>
+        <div class="expertise-item"><span class="expertise-number">/03</span><span class="expertise-icon" aria-hidden="true">⟡</span><h3>Experimentation</h3><p>Prototyping systems, exploring interaction design, and learning through iteration.</p><div class="expertise-tags">PROTOTYPING <span>·</span> UX <span>·</span> AI TOOLS</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-zone" aria-labelledby="about-title">
+    <div class="about-label"><span class="section-eyebrow">03 / BEHIND THE CODE</span><span class="about-flourish" aria-hidden="true">✳</span></div>
+    <div class="about-copy">
+      <h2 id="about-title">Curiosity is the <em>starting point.</em></h2>
+      <p>My background combines C# programming work with Game Development studies at Stockholm University. I enjoy exploring how thoughtful engineering can make complex systems easier to understand, whether that's a game mechanic, a desktop tool, or an adaptive interface.</p>
+      <p>I'm interested in roles where I can keep learning, collaborate on meaningful problems, and contribute clean, dependable code.</p>
+      <div class="about-links"><a class="text-link" href="https://github.com/Ruscemp" target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a><a class="text-link" href="https://www.linkedin.com/in/jaanek-kerma-257383190/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a></div>
+    </div>
+  </section>
+
+    </div>
+  </section>
+
+  <section id="connect" class="contact-zone" aria-labelledby="contact-title">
+    <div class="shell contact-inner">
+      <div><div class="section-eyebrow">04 / LET'S CONNECT</div><h2 id="contact-title">Have a problem<br />worth <em>solving?</em></h2></div>
+      <div class="contact-action"><p>I'm interested in programming roles across games, software, and testing. I'd love to hear about what you're building.</p><a class="button button-dark" href={sitePath("contact/")}>Let’s talk <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+</SiteLayout>

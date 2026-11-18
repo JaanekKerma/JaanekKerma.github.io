@@ -1,0 +1,36 @@
+---
+import type { Project } from '../data/projects';
+import ProjectVisual from './ProjectVisual.astro';
+import { sitePath } from '../utils/paths';
+
+interface Props {
+  project: Project;
+  index: number;
+  prominent?: boolean;
+  tags?: readonly string[];
+}
+const { project, index, prominent = false, tags } = Astro.props;
+const displayedTags = tags ?? project.stack.slice(0, 4);
+---
+<article class={'project-card' + (prominent ? ' project-card--prominent' : '')}>
+  <a class="project-card__visual" href={sitePath('projects/' + project.slug + '/')} aria-label={'Read about ' + project.title}>
+    {project.coverImage ? (
+      <img class="project-image" src={sitePath(project.coverImage)} alt={project.coverAlt ?? project.title} loading="lazy" decoding="async" />
+    ) : <ProjectVisual variant={project.visual} />}
+    <span class="visual-link-indicator" aria-hidden="true">↗</span>
+  </a>
+  <div class="project-card__body">
+    <div class="project-card__meta">
+      <span>{String(index + 1).padStart(2, '0')} / {project.category === 'game' ? 'GAME DEVELOPMENT' : 'SOFTWARE'}</span>
+      <span>{project.timeframe}</span>
+    </div>
+    <div class="project-card__heading">
+      <h3><a href={sitePath('projects/' + project.slug + '/')}>{project.title}</a></h3>
+      <span class="arrow-badge" aria-hidden="true">↗</span>
+    </div>
+    <p>{project.summary}</p>
+    <div class="tag-row" aria-label="Technologies used">
+      {displayedTags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+  </div>
+</article>

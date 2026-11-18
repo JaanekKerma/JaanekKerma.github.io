@@ -1,0 +1,71 @@
+name: Publish develop preview
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out development source
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install preview dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build preview at /preview/
+        run: npm run build
+        env:
+          ASTRO_PREVIEW: 'true'
+      - name: Validate preview URLs
+        run: node scripts/check-preview.mjs
+
+      - name: Check out published production source
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: _production
+      - name: Install production dependencies
+        working-directory: _production
+        run: npm install --no-audit --no-fund
+      - name: Build production site
+        working-directory: _production
+        run: npm run build
+      - name: Validate production build
+        working-directory: _production
+        run: node scripts/check-production.mjs
+
+      - name: Assemble production and preview together
+        run: |
+          mkdir -p publish/preview
+          cp -a _production/dist/. publish/
+          cp -a dist/. publish/preview/
+          test -f publish/index.html
+          test -f publish/preview/index.html
+      - name: Upload complete Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./publish
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: portfolio-preview
+      url: https://jaanekkerma.github.io/preview/
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,71 @@
+name: Deploy portfolio to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out production source
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install production dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build production site
+        run: npm run build
+      - name: Validate production output
+        run: node scripts/check-production.mjs
+
+      - name: Check out development preview source
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          path: _preview
+      - name: Install preview dependencies
+        working-directory: _preview
+        run: npm install --no-audit --no-fund
+      - name: Build preview at /preview/
+        working-directory: _preview
+        run: npm run build
+        env:
+          ASTRO_PREVIEW: 'true'
+      - name: Validate preview output
+        working-directory: _preview
+        run: node scripts/check-preview.mjs
+
+      - name: Assemble production and preview together
+        run: |
+          mkdir -p publish/preview
+          cp -a dist/. publish/
+          cp -a _preview/dist/. publish/preview/
+          test -f publish/index.html
+          test -f publish/preview/index.html
+      - name: Upload complete Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./publish
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
