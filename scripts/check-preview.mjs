@@ -133,7 +133,7 @@ for (const requiredText of [
 for (const expectedLabel of ['Solo', 'Team', 'Unity', 'Unreal', 'FPS', 'First Person']) {
   if (!indexHtml.includes('>' + expectedLabel + '<')) broken.push('Project filter missing tag: ' + expectedLabel);
 }
-if ((indexHtml.match(/data-project-item/g) ?? []).length !== 6) {
+if ((indexHtml.match(/<div\b[^>]*\bdata-project-item\b/g) ?? []).length !== 6) {
   broken.push('Expected six searchable project cards');
 }
 
