@@ -1,0 +1,110 @@
+---
+import type { ProjectVisual as VisualType } from '../data/projects';
+
+interface Props {
+  variant: VisualType;
+  large?: boolean;
+}
+const { variant, large = false } = Astro.props;
+const labels: Record<VisualType, string> = {
+  fortune: 'Abstract diagram of number entities flowing through arithmetic gates',
+  arena: 'Abstract tactical arena diagram with targeting reticle',
+  tictactoe: 'Stylized tic-tac-toe board floating in a starfield',
+  desktop: 'Stylized desktop configuration editor',
+};
+---
+<div class={'project-visual visual-' + variant + (large ? ' visual-large' : '')} role="img" aria-label={labels[variant]}>
+  <span class="visual-corner visual-corner--tl" aria-hidden="true"></span>
+  <span class="visual-corner visual-corner--br" aria-hidden="true"></span>
+  {variant === 'fortune' && (
+    <>
+      <span class="visual-topline" aria-hidden="true">FG / CORE_SYSTEM</span>
+      <svg class="visual-svg fortune-svg" viewBox="0 0 640 400" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <circle cx="320" cy="205" r="133" stroke="#98A9FF" stroke-opacity=".20" />
+        <circle cx="320" cy="205" r="112" stroke="#98A9FF" stroke-opacity=".27" stroke-dasharray="2 10" />
+        <circle cx="320" cy="205" r="89" stroke="#A5B4FF" stroke-opacity=".45" />
+        <circle cx="320" cy="205" r="60" stroke="#C5D4FF" stroke-opacity=".40" />
+        <path d="M32 294C129 294 121 107 229 107S309 299 402 299 492 165 608 165" stroke="#A8A4FD" stroke-width="2" stroke-opacity=".68"/>
+        <path d="M30 158C116 158 178 248 240 248S355 140 421 140 519 258 612 258" stroke="#B1F5D1" stroke-width="2" stroke-opacity=".50"/>
+        <path d="M229 107v75M402 261v75M470 140v79" stroke="#C8D0FB" stroke-dasharray="4 7" stroke-opacity=".4"/>
+        <g fill="#151C38" stroke="#BBF2D3" stroke-width="2">
+          <rect x="205" y="85" width="48" height="44" rx="10"/>
+          <rect x="378" y="275" width="48" height="44" rx="10"/>
+        </g>
+        <text x="229" y="113" font-size="22" fill="#E8FFF0" text-anchor="middle" font-family="monospace">+1</text>
+        <text x="402" y="302" font-size="22" fill="#E8FFF0" text-anchor="middle" font-family="monospace">×2</text>
+        <circle cx="320" cy="205" r="35" fill="#13192E" stroke="#D4EEFC" stroke-width="2"/>
+        <circle cx="320" cy="205" r="28" fill="#151F38"/>
+        <text x="320" y="216" font-size="42" font-weight="700" fill="#ECF8FF" text-anchor="middle" font-family="monospace">7</text>
+        <g fill="#C5A6FD">
+          <circle cx="81" cy="255" r="6"/><circle cx="504" cy="165" r="5"/>
+          <circle cx="526" cy="258" r="5"/>
+        </g>
+        <g fill="#B2F4D3"><circle cx="82" cy="158" r="5"/><circle cx="586" cy="258" r="6"/></g>
+      </svg>
+      <span class="visual-bottomline" aria-hidden="true">TRANSFORM → MATCH → RESTORE</span>
+    </>
+  )}
+  {variant === 'arena' && (
+    <>
+      <span class="visual-topline" aria-hidden="true">SZ / ARENA_01</span>
+      <svg class="visual-svg arena-svg" viewBox="0 0 640 400" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <path d="M0 334L268 162 640 312M0 264L268 162 640 254M86 400l182-238M270 400l-2-238M461 400L268 162" stroke="#7F9CB6" stroke-width="1.5" stroke-opacity=".35"/>
+        <path d="M0 96h640M0 132h640M0 168h640M0 204h640" stroke="#6589AD" stroke-opacity=".13"/>
+        <path d="M56 315V184l101-54 98 42v123l-102 51-97-31ZM400 302V153l93-48 96 38v140l-94 48-95-29Z" fill="#223346" stroke="#8DAFCC" stroke-opacity=".75" stroke-width="2"/>
+        <path d="M96 201l59-33 56 25v89l-56 29-59-19zM443 173l50-26 52 20v98l-51 26-51-20z" stroke="#A8C5D9" stroke-opacity=".4"/>
+        <circle cx="320" cy="212" r="67" stroke="#D5EF9D" stroke-width="1.7" stroke-opacity=".63"/>
+        <circle cx="320" cy="212" r="15" stroke="#D5EF9D" stroke-width="1.8"/>
+        <path d="M320 123v57m0 65v59m-88-92h55m65 0h55" stroke="#D5EF9D" stroke-width="2"/>
+        <path d="M130 107h76m-76 0v45M506 83h-72m72 0v45" stroke="#C4D8EE" stroke-opacity=".48"/>
+        <circle cx="156" cy="240" r="7" fill="#EC937B"/><circle cx="483" cy="224" r="7" fill="#D4EC96"/>
+      </svg>
+      <span class="visual-bottomline" aria-hidden="true">1 V 1 / ELECTRUM ZONE</span>
+    </>
+  )}
+  {variant === 'tictactoe' && (
+    <>
+      <span class="visual-topline" aria-hidden="true">TTT / BOARD_STATE</span>
+      <svg class="visual-svg tictactoe-svg" viewBox="0 0 640 400" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <g fill="#F5F9FF" opacity=".6">
+          <circle cx="61" cy="74" r="2"/><circle cx="133" cy="298" r="2"/><circle cx="555" cy="72" r="1.8"/>
+          <circle cx="535" cy="314" r="2"/><circle cx="430" cy="64" r="2"/><circle cx="207" cy="112" r="1.7"/>
+          <circle cx="477" cy="353" r="2"/><circle cx="78" cy="200" r="1.5"/>
+        </g>
+        <g transform="translate(194 74) rotate(-7 125 125)">
+          <rect x="0" y="0" width="250" height="250" rx="22" fill="#15273E" stroke="#80BDF1" stroke-opacity=".5"/>
+          <path d="M83 18v214M166 18v214M18 83h214M18 166h214" stroke="#85BAE0" stroke-width="2.5" stroke-opacity=".7"/>
+          <g stroke="#BBEAF3" stroke-width="7" stroke-linecap="round">
+            <path d="M31 31l35 35M66 31L31 66"/>
+            <path d="M115 115l36 36M151 115l-36 36"/>
+            <path d="M31 199l35 35M66 199l-35 35"/>
+          </g>
+          <g stroke="#E7B8FF" stroke-width="7">
+            <circle cx="125" cy="42" r="20"/><circle cx="209" cy="125" r="20"/><circle cx="209" cy="209" r="20"/>
+          </g>
+        </g>
+        <path d="M88 285l22-14 23 14-23 15zM520 133l16-10 16 10-16 9z" fill="#D6E4FF" fill-opacity=".28"/>
+      </svg>
+      <span class="visual-bottomline" aria-hidden="true">PLAYER_01 / YOUR_MOVE</span>
+    </>
+  )}
+  {variant === 'desktop' && (
+    <>
+      <span class="visual-topline" aria-hidden="true">CFG / SETTINGS.INI</span>
+      <div class="desktop-window" aria-hidden="true">
+        <div class="desktop-titlebar"><span class="window-dots"><i></i><i></i><i></i></span><span>settings.ini</span><span>— □ ×</span></div>
+        <div class="desktop-content">
+          <div class="desktop-sidebar"><b>GENERAL</b><span>Profiles</span><span class="selected">Settings</span><span>Advanced</span></div>
+          <div class="desktop-fields">
+            <span class="code-comment">[configuration]</span>
+            <span><em>language</em> <b>=</b> <strong>en</strong></span>
+            <span><em>autosave</em> <b>=</b> <strong>true</strong></span>
+            <span><em>theme</em> <b>=</b> <strong>dark</strong></span>
+            <div class="desktop-cta">Save changes <span>↗</span></div>
+          </div>
+        </div>
+      </div>
+      <span class="visual-bottomline" aria-hidden="true">READ / EDIT / WRITE</span>
+    </>
+  )}
+</div>

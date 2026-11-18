@@ -1,0 +1,31 @@
+---
+import type { Project } from '../data/projects';
+import ProjectVisual from './ProjectVisual.astro';
+
+interface Props {
+  project: Project;
+  index: number;
+  prominent?: boolean;
+}
+const { project, index, prominent = false } = Astro.props;
+---
+<article class={'project-card' + (prominent ? ' project-card--prominent' : '')}>
+  <a class="project-card__visual" href={'/projects/' + project.slug + '/'} aria-label={'Read about ' + project.title}>
+    <ProjectVisual variant={project.visual} />
+    <span class="visual-link-indicator" aria-hidden="true">↗</span>
+  </a>
+  <div class="project-card__body">
+    <div class="project-card__meta">
+      <span>{String(index + 1).padStart(2, '0')} / {project.category === 'game' ? 'GAME DEVELOPMENT' : 'SOFTWARE'}</span>
+      <span>{project.timeframe}</span>
+    </div>
+    <div class="project-card__heading">
+      <h3><a href={'/projects/' + project.slug + '/'}>{project.title}</a></h3>
+      <span class="arrow-badge" aria-hidden="true">↗</span>
+    </div>
+    <p>{project.summary}</p>
+    <div class="tag-row" aria-label="Technologies used">
+      {project.stack.slice(0, 4).map((tool) => <span class="tag">{tool}</span>)}
+    </div>
+  </div>
+</article>
