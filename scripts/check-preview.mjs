@@ -5,6 +5,7 @@ const root = 'dist';
 const required = [
   'index.html',
   'projects/index.html',
+  'contact/index.html',
   'projects/fortunes-gate/index.html',
   'projects/site-zero/index.html',
   'projects/takstrid/index.html',
@@ -31,7 +32,7 @@ const publicRepositories = new Set([
   'Ruscemp/Roguelike-game',
   'Ruscemp/Unreal3DRendering',
 ].map((name) => name.toLowerCase()));
-const allowedExternalHosts = new Set(['jaanekkerma.github.io', 'github.com', 'www.linkedin.com', 'ruscemp.itch.io', 'chhuusko.itch.io']);
+const allowedExternalHosts = new Set(['jaanekkerma.github.io', 'github.com', 'www.linkedin.com', 'ruscemp.itch.io', 'chhuusko.itch.io', 'formsubmit.co']);
 const broken = [];
 for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
   const html = readFileSync(filename, 'utf8');
@@ -59,7 +60,24 @@ for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
     broken.push(`${relative(root, filename)}: missing noindex directive`);
   }
 }
+const homepage = readFileSync(join(root,'index.html'),'utf8');
+const contact = readFileSync(join(root,'contact/index.html'),'utf8');
+const workStart = homepage.indexOf('id="work"');
+const workEnd = homepage.indexOf('</section>', workStart);
+const featured = workStart >= 0 && workEnd > workStart ? homepage.slice(workStart,workEnd) : '';
+if (!featured) broken.push('Featured section missing');
+for (const name of ["Site Zero","Takstrid"]) {
+  if (!featured.includes(name)) broken.push('Featured section missing '+name);
+}
+for (const name of ["Grim Farmlore","Tic Tac Toe","Ninja Frog Adventure Saga"]) {
+  if (featured.includes(name)) broken.push('Unexpected homepage feature '+name);
+}
+if (!homepage.includes('fortunes-gate')) broken.push('Flagship feature missing');
+if (!contact.includes('name="message"') || !contact.includes('name="email"') || !contact.includes('formsubmit.co/')) {
+  broken.push('Contact form missing delivery endpoint or fields');
+}
+if (!contact.includes('076 212 69 22')) broken.push('Contact phone number missing');
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
-console.log('Preview verified: 8 pages, forbidden project absent, favicon, scoped links, and noindex metadata.');
+console.log('Preview verified: 9 pages, forbidden project absent, favicon, scoped links, and noindex metadata.');
