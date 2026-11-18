@@ -18,11 +18,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out development source
+        uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Install dependencies
+      - name: Install preview dependencies
         run: npm install --no-audit --no-fund
       - name: Build preview at /preview/
         run: npm run build
@@ -30,30 +31,30 @@ jobs:
           ASTRO_PREVIEW: 'true'
       - name: Validate preview URLs
         run: node scripts/check-preview.mjs
-      - name: Assemble Pages artifact
+
+      - name: Check out published production source
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: _production
+      - name: Install production dependencies
+        working-directory: _production
+        run: npm install --no-audit --no-fund
+      - name: Build production site
+        working-directory: _production
+        run: npm run build
+      - name: Validate production build
+        working-directory: _production
+        run: node scripts/check-production.mjs
+
+      - name: Assemble production and preview together
         run: |
           mkdir -p publish/preview
+          cp -a _production/dist/. publish/
           cp -a dist/. publish/preview/
-          cat > publish/index.html <<'HTML'
-          <!doctype html>
-          <html lang="en">
-            <head>
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-              <meta name="robots" content="noindex, nofollow">
-              <title>Jaanek Kerma — Portfolio in development</title>
-              <style>
-                body{font:16px system-ui,sans-serif;background:#101318;color:#f3f4f0;min-height:100vh;display:grid;place-items:center;margin:0;padding:24px;box-sizing:border-box}
-                main{max-width:640px}
-                h1{font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.04em}
-                p{line-height:1.75;color:#bbc4c9}
-                a{color:#b9ec91}
-              </style>
-            </head>
-            <body><main><h1>Jaanek Kerma</h1><p>My portfolio is being refined. Explore the latest project pages in the development preview.</p><p><a href="/preview/">Explore the development preview →</a></p></main></body>
-          </html>
-          HTML
-      - name: Upload Pages artifact
+          test -f publish/index.html
+          test -f publish/preview/index.html
+      - name: Upload complete Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./publish
