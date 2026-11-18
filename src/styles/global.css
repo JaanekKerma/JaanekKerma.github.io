@@ -367,3 +367,20 @@ p { line-height: 1.72; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* A visible distinction between pre-release content and the future public site. */
+.preview-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem 1rem;
+  padding: .65rem 1rem;
+  border-bottom: 1px solid rgba(185, 236, 145, .25);
+  background: #273127;
+  color: #e9f6e3;
+  font: 500 .76rem var(--mono);
+  text-align: center;
+}
+.preview-banner strong { color: var(--lime); letter-spacing: .06em; }
+.preview-banner span { color: #d2dfcd; }

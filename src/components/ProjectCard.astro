@@ -1,6 +1,7 @@
 ---
 import type { Project } from '../data/projects';
 import ProjectVisual from './ProjectVisual.astro';
+import { sitePath } from '../utils/paths';
 
 interface Props {
   project: Project;
@@ -10,7 +11,7 @@ interface Props {
 const { project, index, prominent = false } = Astro.props;
 ---
 <article class={'project-card' + (prominent ? ' project-card--prominent' : '')}>
-  <a class="project-card__visual" href={'/projects/' + project.slug + '/'} aria-label={'Read about ' + project.title}>
+  <a class="project-card__visual" href={sitePath('projects/' + project.slug + '/')} aria-label={'Read about ' + project.title}>
     <ProjectVisual variant={project.visual} />
     <span class="visual-link-indicator" aria-hidden="true">↗</span>
   </a>
@@ -20,7 +21,7 @@ const { project, index, prominent = false } = Astro.props;
       <span>{project.timeframe}</span>
     </div>
     <div class="project-card__heading">
-      <h3><a href={'/projects/' + project.slug + '/'}>{project.title}</a></h3>
+      <h3><a href={sitePath('projects/' + project.slug + '/')}>{project.title}</a></h3>
       <span class="arrow-badge" aria-hidden="true">↗</span>
     </div>
     <p>{project.summary}</p>

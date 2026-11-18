@@ -3,6 +3,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import ProjectVisual from '../../components/ProjectVisual.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { projects, type Project } from '../../data/projects';
+import { sitePath } from '../../utils/paths';
 
 interface Props {
   project: Project;
@@ -25,7 +26,7 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
   <article>
     <header class="detail-hero shell">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><span aria-hidden="true">/</span><a href="/projects/">Projects</a><span aria-hidden="true">/</span><span aria-current="page">{project.title}</span>
+        <a href={sitePath("")}>Home</a><span aria-hidden="true">/</span><a href={sitePath("projects/")}>Projects</a><span aria-hidden="true">/</span><span aria-current="page">{project.title}</span>
       </nav>
       <div class="detail-headline">
         <div>
@@ -93,7 +94,7 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
           <div class="detail-aside-rule"></div>
           <span class="aside-label">PROJECT NOTE</span>
           <p class="aside-note">This is a first case-study design iteration. Artwork is illustrative; original screenshots, deeper code analysis, and final copy can be added during the content migration.</p>
-          <a class="text-link" href="/projects/">← All projects</a>
+          <a class="text-link" href={sitePath("projects/")}>← All projects</a>
         </div>
       </aside>
     </div>
@@ -101,7 +102,7 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
 
   <section class="related-section">
     <div class="shell">
-      <div class="section-heading"><div><div class="section-eyebrow">KEEP EXPLORING</div><h2>Other <em>work.</em></h2></div><a class="text-link" href="/projects/">Browse all projects ↗</a></div>
+      <div class="section-heading"><div><div class="section-eyebrow">KEEP EXPLORING</div><h2>Other <em>work.</em></h2></div><a class="text-link" href={sitePath("projects/")}>Browse all projects ↗</a></div>
       <div class="featured-grid related-grid">{related.map((item, index) => <ProjectCard project={item} index={index} />)}</div>
     </div>
   </section>

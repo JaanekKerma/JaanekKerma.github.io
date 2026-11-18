@@ -23,7 +23,20 @@ The site is static and does not require a backend.
 - `develop`: Integration branch for new portfolio work.
 - `feature/*`: Optional branches for larger changes, reviewed and merged into `develop`.
 
-A GitHub Actions workflow checks that `develop` builds. The deployment workflow is configured to publish **only from `main`**, once GitHub Pages is enabled under **Settings → Pages → Build and deployment → Source: GitHub Actions** and we deliberately merge the approved site.
+The `develop` branch runs build checks and a preview deployment to **https://jaanekkerma.github.io/preview/**. The preview is intentionally marked `noindex`, has a development banner, and is distinct from the eventual production website. The root address displays a simple temporary landing page until the portfolio is approved.
+
+For GitHub Pages preview deployment, set **Settings → Pages → Build and deployment → Source: GitHub Actions** once. If GitHub restricts deployment to protected branches, allow `develop` in the `github-pages` environment.
+
+The separate production deployment workflow is configured to publish **only from `main`**, after we deliberately merge the approved site. The single GitHub Pages domain can only have one active deployment at a time; before production launch, we will combine root production and the `/preview/` build into a single Pages artifact to preserve both environments.
+
+## Preview validation
+
+```bash
+ASTRO_PREVIEW=true npm run build
+node scripts/check-preview.mjs
+```
+
+The link checker ensures that preview navigation, image paths, and generated routes stay under `/preview/`.
 
 ## Project layout
 

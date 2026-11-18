@@ -3,6 +3,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ProjectVisual from '../components/ProjectVisual.astro';
 import { featuredProjects } from '../data/projects';
+import { sitePath } from '../utils/paths';
 ---
 <SiteLayout title="Jaanek Kerma — Game & Software Developer" description="Portfolio of Jaanek Kerma, a C# developer creating game systems, interactive experiences, and practical software.">
   <section class="hero shell" aria-labelledby="hero-title">
@@ -22,7 +23,7 @@ import { featuredProjects } from '../data/projects';
     <div class="hero-right">
       <div class="hero-visual-header"><span>FEATURED BUILD / 001</span><span class="online-dot" aria-hidden="true"></span></div>
       <ProjectVisual variant="fortune" large />
-      <a class="hero-visual-footer" href="/projects/fortunes-gate/">
+      <a class="hero-visual-footer" href={sitePath("projects/fortunes-gate/")}>
         <div><span>UNITY · C# · 2026</span><strong>Fortune's Gate</strong></div>
         <span class="circle-arrow" aria-hidden="true">↗</span>
       </a>
@@ -37,7 +38,7 @@ import { featuredProjects } from '../data/projects';
   <section id="work" class="section-block shell" aria-labelledby="work-title">
     <div class="section-heading">
       <div><div class="section-eyebrow">01 / SELECTED WORK</div><h2 id="work-title">Projects worth <em>exploring.</em></h2></div>
-      <div class="section-heading-aside"><p>A mix of playable games and practical software, with the technical work behind each project brought forward.</p><a class="text-link" href="/projects/">View all projects <span aria-hidden="true">↗</span></a></div>
+      <div class="section-heading-aside"><p>A mix of playable games and practical software, with the technical work behind each project brought forward.</p><a class="text-link" href={sitePath("projects/")}>View all projects <span aria-hidden="true">↗</span></a></div>
     </div>
     <div class="featured-grid">
       {featuredProjects.map((project, index) => <ProjectCard project={project} index={index} prominent={index === 0} />)}
