@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: github-pages
+      name: portfolio-preview
       url: https://jaanekkerma.github.io/preview/
     steps:
       - name: Deploy to GitHub Pages
