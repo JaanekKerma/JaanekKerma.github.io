@@ -942,3 +942,39 @@ html { scroll-padding-top: 78px; }
   .hero { padding-top: 10px; }
   #work.section-heading { margin-bottom: 24px; }
 }
+
+
+/* Subtle code rain: only the outside 10% of the viewport, fading inward.
+   The overlay is purely decorative and never intercepts clicks or scroll. */
+.code-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  contain: layout paint;
+}
+.code-rain__canvas {
+  position: absolute;
+  top: 0;
+  display: block;
+  height: 100%;
+  width: 10vw;
+  max-width: 190px;
+  opacity: .68;
+  mix-blend-mode: screen;
+}
+.code-rain__canvas--left {
+  left: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 12%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 12%, transparent 100%);
+}
+.code-rain__canvas--right {
+  right: 0;
+  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 12%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 0%, #000 12%, transparent 100%);
+}
+@media (max-width: 1099px), (prefers-reduced-motion: reduce) {
+  .code-rain { display: none; }
+}

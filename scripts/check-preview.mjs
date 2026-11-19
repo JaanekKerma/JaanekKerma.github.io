@@ -158,6 +158,25 @@ if (startFeatured < 0 || homepage.slice(0, startFeatured).includes('id="work" cl
   broken.push('Featured Work anchor should be on the section heading');
 }
 
+
+// Ambient code rain is decorative, two-sided, and absent from the published main source.
+// Preview and production use the same layout component, but have independent builds.
+for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
+  const html = readFileSync(filename, 'utf8');
+  if (!html.includes('data-code-rain') ||
+      !html.includes('data-code-side="left"') ||
+      !html.includes('data-code-side="right"') ||
+      !html.includes('aria-hidden="true"')) {
+    broken.push(relative(root, filename) + ': edge code rain markup missing');
+  }
+}
+if (!siteStyles.includes('prefers-reduced-motion: reduce') ||
+    !siteStyles.includes('pointer-events: none') ||
+    !siteStyles.includes('.code-rain__canvas--left') ||
+    !siteStyles.includes('.code-rain__canvas--right')) {
+  broken.push('Edge animation CSS or reduced-motion support missing');
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
