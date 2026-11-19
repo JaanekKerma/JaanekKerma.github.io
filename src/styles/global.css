@@ -1019,3 +1019,44 @@ body { position: relative; }
 @media (max-width: 849px) {
   .code-rain { display: none; }
 }
+
+
+/* Drawer-open focus effect: emphasize only the left code rain.
+   The rain stays document-anchored and pointer-events:none, but rises above
+   the dark backdrop while the drawer is visible. The right rain stays
+   behind the drawer so navigation remains unobstructed. */
+.code-rain__side--left,
+.code-rain__side--left .code-rain__static,
+.code-rain__side--left .code-rain__trail {
+  transition: color .3s ease, opacity .3s ease, text-shadow .3s ease, background .3s ease;
+}
+.drawer-is-open .code-rain {
+  z-index: 151;
+  pointer-events: none;
+}
+.drawer-is-open .code-rain__side--left {
+  color: #d7ffc4;
+  background: linear-gradient(to right, rgba(100, 210, 125, .12), transparent 86%);
+  text-shadow: 0 0 7px rgba(185, 255, 177, .56);
+}
+.drawer-is-open .code-rain__side--left .code-rain__static {
+  opacity: .6;
+}
+.drawer-is-open .code-rain__side--left .code-rain__trail {
+  opacity: 1;
+  color: #e6ffd2;
+  text-shadow:
+    0 0 3px rgba(240, 255, 216, .98),
+    0 0 11px rgba(156, 255, 153, .96),
+    0 0 24px rgba(100, 245, 138, .65);
+}
+.drawer-is-open .code-rain__side--right {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-rain__side--left,
+  .code-rain__side--left .code-rain__static,
+  .code-rain__side--left .code-rain__trail {
+    transition: none;
+  }
+}

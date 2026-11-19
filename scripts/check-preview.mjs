@@ -185,6 +185,20 @@ if (!/body\s*\{[^}]*position\s*:\s*relative/.test(documentRainCss) ||
   broken.push('Code rain should span the document and scroll with content, not remain fixed to the viewport');
 }
 
+
+
+// Opening the drawer must highlight the left rain over the dimming backdrop,
+// without intercepting pointer events or covering the drawer on the right.
+const drawerRainCSS = siteStyles.replace(/\/\*[\s\S]*?\*\//g, '');
+for (const rule of [
+  /\.drawer-is-open\s+\.code-rain\s*\{[^}]*z-index\s*:\s*151/,
+  /\.drawer-is-open\s+\.code-rain__side--left\s+\.code-rain__trail\s*\{[^}]*text-shadow\s*:/,
+  /\.drawer-is-open\s+\.code-rain__side--right\s*\{[^}]*visibility\s*:\s*hidden/,
+  /\.drawer-is-open\s+\.code-rain\s*\{[^}]*pointer-events\s*:\s*none/,
+]) {
+  if (!rule.test(drawerRainCSS)) broken.push('Missing drawer-active left code rain styling');
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
