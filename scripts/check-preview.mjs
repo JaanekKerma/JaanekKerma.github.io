@@ -170,8 +170,8 @@ for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
     broken.push(relative(root, filename) + ': edge code rain markup missing');
   }
 }
-if (!siteStyles.includes('prefers-reduced-motion: reduce') ||
-    !siteStyles.includes('pointer-events: none') ||
+if (!/prefers-reduced-motion\s*:\s*reduce/.test(siteStyles) ||
+    !/pointer-events\s*:\s*none/.test(siteStyles) ||
     !siteStyles.includes('.code-rain__canvas--left') ||
     !siteStyles.includes('.code-rain__canvas--right')) {
   broken.push('Edge animation CSS or reduced-motion support missing');
