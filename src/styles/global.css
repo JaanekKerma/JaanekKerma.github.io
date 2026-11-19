@@ -944,10 +944,11 @@ html { scroll-padding-top: 78px; }
 }
 
 
-/* Code rain — a static, reliably visible source-code texture, with slow animated
-   trails. No JavaScript or canvas required. Strictly contained to the side edges. */
+/* Code rain extends along the document and scrolls with the page.
+   Characters stay confined to the fading side edges; no viewport attachment. */
+body { position: relative; }
 .code-rain {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 15;
   pointer-events: none;
@@ -1003,11 +1004,12 @@ html { scroll-padding-top: 78px; }
   opacity: .72;
   text-shadow: 0 0 9px rgba(187, 255, 181, .66);
   animation: code-rain-fall var(--duration) linear var(--delay) infinite;
-  will-change: transform;
+  /* The animation travels the whole document instead of one viewport. */
+  will-change: top;
 }
 @keyframes code-rain-fall {
-  from { transform: translate3d(0, -100px, 0); }
-  to { transform: translate3d(0, calc(100vh + 480px), 0); }
+  from { top: -370px; }
+  to { top: calc(100% + 30px); }
 }
 /* No decorative animation for reduced-motion users. Keep the static columns. */
 @media (prefers-reduced-motion: reduce) {

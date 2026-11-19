@@ -177,6 +177,14 @@ if (!siteStyles.includes('.code-rain__static') ||
   broken.push('CSS-only code rain, animation or accessibility styles are missing');
 }
 
+
+const documentRainCss = siteStyles.replace(/\/\*[\s\S]*?\*\//g, '');
+if (!/body\s*\{[^}]*position\s*:\s*relative/.test(documentRainCss) ||
+    !/\.code-rain\s*\{[^}]*position\s*:\s*absolute/.test(documentRainCss) ||
+    !/@keyframes\s+code-rain-fall\s*\{[\s\S]*?top\s*:\s*calc\(100%\s*\+\s*30px\)/.test(documentRainCss)) {
+  broken.push('Code rain should span the document and scroll with content, not remain fixed to the viewport');
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }

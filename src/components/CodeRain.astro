@@ -5,8 +5,8 @@ const columns = [{"i":0,"staticText":"0\nF\n:\n/\nC\n(\n*\nB\n]\n*\nC\n)\n#\nE\n
   {(['left','right'] as const).map((side) => (
     <div class:list={['code-rain__side', 'code-rain__side--' + side]} data-code-side={side}>
       {columns.map((column) => (
-        <span class="code-rain__track" style={`--column: ${column.i}; --duration: ${column.duration}s; --delay: ${column.delay}s;`}>
-          <span class="code-rain__static">{column.staticText}</span>
+        <span class="code-rain__track" style={`--column: ${column.i}; --duration: ${column.duration * 5}s; --delay: ${column.delay * 5}s;`}>
+          <span class="code-rain__static">{Array(7).fill(column.staticText).join('\n')}</span>
           <span class="code-rain__trail">{column.animated}</span>
         </span>
       ))}
