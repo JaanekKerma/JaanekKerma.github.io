@@ -199,6 +199,15 @@ for (const rule of [
   if (!rule.test(drawerRainCSS)) broken.push('Missing drawer-active left code rain styling');
 }
 
+
+// Wider code rain must keep both edge fades gradual and maintain matching column density.
+if (!/\.code-rain__side\s*\{[^}]*width\s*:\s*16vw/.test(siteStyles) ||
+    !/\.code-rain__side\s*\{[^}]*--code-columns\s*:\s*20/.test(siteStyles) ||
+    (siteStyles.match(/(?:mask-image|mask-image):\s*linear-gradient/g) ?? []).length < 2 ||
+    !siteStyles.includes('88%')) {
+  broken.push('Wider edge code rain or gradual fading is missing');
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
