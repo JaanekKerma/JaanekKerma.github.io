@@ -944,37 +944,76 @@ html { scroll-padding-top: 78px; }
 }
 
 
-/* Subtle code rain: only the outside 10% of the viewport, fading inward.
-   The overlay is purely decorative and never intercepts clicks or scroll. */
+/* Code rain — a static, reliably visible source-code texture, with slow animated
+   trails. No JavaScript or canvas required. Strictly contained to the side edges. */
 .code-rain {
   position: fixed;
   inset: 0;
-  z-index: 8;
-  overflow: hidden;
+  z-index: 15;
   pointer-events: none;
   user-select: none;
-  contain: layout paint;
+  overflow: hidden;
 }
-.code-rain__canvas {
+.code-rain__side {
   position: absolute;
   top: 0;
-  display: block;
-  height: 100%;
+  bottom: 0;
   width: 10vw;
-  max-width: 190px;
-  opacity: .68;
-  mix-blend-mode: screen;
+  max-width: 210px;
+  overflow: hidden;
+  color: #b4edb1;
+  font-family: var(--mono);
+  font-size: clamp(9px, .72vw, 12px);
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0;
+  text-shadow: 0 0 8px rgba(104, 230, 146, .35);
 }
-.code-rain__canvas--left {
+.code-rain__side--left {
   left: 0;
-  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 12%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 0%, #000 12%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 13%, rgba(0,0,0,.68) 46%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 13%, rgba(0,0,0,.68) 46%, transparent 100%);
 }
-.code-rain__canvas--right {
+.code-rain__side--right {
   right: 0;
-  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 12%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 0%, #000 12%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 13%, rgba(0,0,0,.68) 46%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 0%, #000 13%, rgba(0,0,0,.68) 46%, transparent 100%);
 }
-@media (max-width: 1099px), (prefers-reduced-motion: reduce) {
+.code-rain__track {
+  position: absolute;
+  top: 0;
+  left: calc((100% / 12) * var(--column));
+  width: calc(100% / 12);
+  height: 100%;
+  overflow: visible;
+}
+.code-rain__static,
+.code-rain__trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  white-space: pre;
+  font: inherit;
+}
+.code-rain__static { opacity: .32; }
+.code-rain__trail {
+  top: -370px;
+  color: #c6ffc7;
+  opacity: .72;
+  text-shadow: 0 0 9px rgba(187, 255, 181, .66);
+  animation: code-rain-fall var(--duration) linear var(--delay) infinite;
+  will-change: transform;
+}
+@keyframes code-rain-fall {
+  from { transform: translate3d(0, -100px, 0); }
+  to { transform: translate3d(0, calc(100vh + 480px), 0); }
+}
+/* No decorative animation for reduced-motion users. Keep the static columns. */
+@media (prefers-reduced-motion: reduce) {
+  .code-rain__trail { animation: none; display: none; }
+}
+/* At phone/tablet widths, foreground readability matters more than ambience. */
+@media (max-width: 849px) {
   .code-rain { display: none; }
 }

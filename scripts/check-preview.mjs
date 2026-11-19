@@ -159,22 +159,22 @@ if (startFeatured < 0 || homepage.slice(0, startFeatured).includes('id="work" cl
 }
 
 
-// Ambient code rain is decorative, two-sided, and absent from the published main source.
-// Preview and production use the same layout component, but have independent builds.
+// The code rain must render without JavaScript; motion is only an enhancement.
 for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
   const html = readFileSync(filename, 'utf8');
-  if (!html.includes('data-code-rain') ||
-      !html.includes('data-code-side="left"') ||
-      !html.includes('data-code-side="right"') ||
-      !html.includes('aria-hidden="true"')) {
-    broken.push(relative(root, filename) + ': edge code rain markup missing');
+  const sideCount = (html.match(/data-code-side="(?:left|right)"/g) ?? []).length;
+  if (!html.includes('data-code-rain') || sideCount !== 2 ||
+      !html.includes('class="code-rain__static"') ||
+      !html.includes('class="code-rain__trail"')) {
+    broken.push(relative(root, filename) + ': visible code-rain side columns missing');
   }
 }
-if (!/prefers-reduced-motion\s*:\s*reduce/.test(siteStyles) ||
-    !/pointer-events\s*:\s*none/.test(siteStyles) ||
-    !siteStyles.includes('.code-rain__canvas--left') ||
-    !siteStyles.includes('.code-rain__canvas--right')) {
-  broken.push('Edge animation CSS or reduced-motion support missing');
+if (!siteStyles.includes('.code-rain__static') ||
+    !siteStyles.includes('.code-rain__trail') ||
+    !siteStyles.includes('code-rain-fall') ||
+    !/prefers-reduced-motion\s*:\s*reduce/.test(siteStyles) ||
+    !/pointer-events\s*:\s*none/.test(siteStyles)) {
+  broken.push('CSS-only code rain, animation or accessibility styles are missing');
 }
 
 if (broken.length) {
