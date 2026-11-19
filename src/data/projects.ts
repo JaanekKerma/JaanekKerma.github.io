@@ -21,6 +21,8 @@ export interface Project {
   detailed?: boolean;
   coverImage?: string;
   coverAlt?: string;
+  heroImage?: string;
+  heroAlt?: string;
   teamSize?: number;
   projectBackground?: {
     subtitle?: string;
@@ -34,6 +36,60 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: 'fortunes-gate',
+    coverImage: 'media/fortunes-gate/cover.webp',
+    coverAlt: "Fortune's Gate cover artwork: mathematical gates and the fractured Nexus",
+    heroImage: 'media/fortunes-gate/banner.webp',
+    heroAlt: "Fortune's Gate promotional banner showing the Nexus within a fractured cosmic sky",
+    gallery: [
+      {
+        title: 'Gameplay — the Void Network',
+        description: 'A live 3D run at Lucky Number 7. Numerical enemies approach along luminous energy routes while the player plans arithmetic gates around the Nexus.',
+        url: 'media/fortunes-gate/gameplay-void-network.webp',
+        alt: 'Gameplay screenshot of Fortune’s Gate showing Lucky 7, approaching numerical enemies, and glowing routes within the Void',
+      },
+      {
+        title: 'Gameplay — branching routes',
+        description: 'As waves progress, routes split and reconnect. Placing gates involves anticipating how different enemy values will pass through the network.',
+        url: 'media/fortunes-gate/gameplay-route-planning.webp',
+        alt: 'Three-dimensional gameplay with branching energy paths, arithmetic gates, and enemy values',
+      },
+      {
+        title: 'Choose your Lucky Number',
+        description: 'Thirteen difficulty choices shape each run. The selection screen also displays difficulty, restoration progress, best clear times, and run traits.',
+        url: 'media/fortunes-gate/lucky-number-selection.webp',
+        alt: 'Lucky Number selection screen with the selected number, progress statistics, and thirteen difficulty choices',
+      },
+      {
+        title: 'Advanced run settings',
+        description: 'Configure 3D or 2D route modes, Continuous or Tactical wave flow, and reproducible or randomly generated map seeds.',
+        url: 'media/fortunes-gate/advanced-run-settings.webp',
+        alt: 'Advanced run settings panel with 3D Void Network mode, wave flow options, and map seed controls',
+      },
+      {
+        title: 'The Almanac',
+        description: 'An in-game collection of field guides explains objectives, arithmetic gates, routes, progression, and other mechanics.',
+        url: 'media/fortunes-gate/almanac.webp',
+        alt: 'Fortune’s Gate Almanac showing its guide navigation and an illustrated explanation of the game objective',
+      },
+      {
+        title: 'Controls and sensitivity',
+        description: 'Input settings include independent mouse, gamepad, and movement sensitivity, deadzone adjustment, and vertical aim inversion.',
+        url: 'media/fortunes-gate/controls.webp',
+        alt: 'Controls tab in the settings menu with sensitivity sliders and gamepad deadzone options',
+      },
+      {
+        title: 'Customizable keybindings',
+        description: 'The control bindings interface offers separate keyboard, mouse, and gamepad categories with remappable gameplay actions.',
+        url: 'media/fortunes-gate/keybindings.webp',
+        alt: 'Keybinding editor listing flight movement keys and keyboard remapping options',
+      },
+      {
+        title: 'Display configuration',
+        description: 'Graphics quality, UI scaling, VSync, and browser-aware display options provide settings for different devices.',
+        url: 'media/fortunes-gate/display-settings.webp',
+        alt: 'Display settings with UI scale slider, graphics quality selection, and apply button',
+      },
+    ],
     title: "Fortune's Gate",
     category: 'game',
     visual: 'fortune',

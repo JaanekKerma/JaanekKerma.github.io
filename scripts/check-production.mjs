@@ -61,5 +61,17 @@ if (existsSync(join(root, 'index.html'))) {
   if (!home.includes('Projects worth')) failures.push('Production homepage does not contain portfolio content');
   if (home.includes('DEVELOPMENT PREVIEW')) failures.push('Preview marker present on production homepage');
 }
+
+const fg = readFileSync(join(root, 'projects/fortunes-gate/index.html'), 'utf8');
+for (const name of [
+  'banner.webp', 'cover.webp', 'gameplay-void-network.webp', 'gameplay-route-planning.webp',
+  'lucky-number-selection.webp', 'advanced-run-settings.webp', 'almanac.webp',
+  'controls.webp', 'keybindings.webp', 'display-settings.webp',
+]) {
+  const rel = 'media/fortunes-gate/' + name;
+  if (!existsSync(join(root, rel))) failures.push('Missing Fortune’s Gate image: ' + name);
+  if (name !== 'cover.webp' && !fg.includes('/' + rel)) failures.push('Unused Fortune’s Gate gallery image: ' + name);
+}
+
 if (failures.length) throw new Error('Production validation failed:\n' + failures.join('\n'));
 console.log('Production output verified: nine pages, safe links, no preview noindex, and locally available assets.');

@@ -1061,3 +1061,32 @@ body { position: relative; }
     transition: none;
   }
 }
+
+
+/* Fortune's Gate: gameplay screenshots first, compact gallery for settings.
+   Keep original proportions accessible via the full-image links. */
+.case-gallery--fortune {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 22px;
+}
+.case-gallery--fortune .case-gallery-item:nth-child(-n + 2) {
+  grid-column: 1 / -1;
+}
+.case-gallery--fortune .case-gallery-item img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: none;
+  object-fit: contain;
+}
+.case-gallery--fortune .case-gallery-item figcaption {
+  padding: 18px 20px 22px;
+}
+.case-gallery--fortune .case-gallery-item figcaption p {
+  font-size: .87rem;
+  line-height: 1.6;
+}
+@media (max-width: 720px) {
+  .case-gallery--fortune { grid-template-columns: minmax(0, 1fr); }
+  .case-gallery--fortune .case-gallery-item:nth-child(-n + 2) { grid-column: auto; }
+}

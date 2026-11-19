@@ -208,6 +208,31 @@ if (!/\.code-rain__side\s*\{[^}]*width\s*:\s*16vw/.test(siteStyles) ||
   broken.push('Wider edge code rain or gradual fading is missing');
 }
 
+
+
+// Fortune's Gate must use authentic optimized project media, not only an illustration.
+const fortuneHtml = readFileSync(join(root, 'projects/fortunes-gate/index.html'), 'utf8');
+for (const name of [
+  'banner.webp', 'cover.webp', 'gameplay-void-network.webp', 'gameplay-route-planning.webp',
+  'lucky-number-selection.webp', 'advanced-run-settings.webp', 'almanac.webp',
+  'controls.webp', 'keybindings.webp', 'display-settings.webp',
+]) {
+  const relativeAsset = 'media/fortunes-gate/' + name;
+  if (!existsSync(join(root, relativeAsset))) {
+    broken.push('Missing Fortune’s Gate optimized media: ' + name);
+  }
+  if (name !== 'cover.webp' && !fortuneHtml.includes('/preview/' + relativeAsset)) {
+    broken.push('Fortune’s Gate detail media not rendered: ' + name);
+  }
+}
+if (!homepage.includes('/preview/media/fortunes-gate/cover.webp') ||
+    !indexHtml.includes('/preview/media/fortunes-gate/cover.webp')) {
+  broken.push('Fortune’s Gate cover must appear in homepage and project cards');
+}
+if (!fortuneHtml.includes('case-gallery--fortune')) {
+  broken.push('Fortune’s Gate gallery layout is missing');
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }
