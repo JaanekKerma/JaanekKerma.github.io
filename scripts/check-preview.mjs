@@ -158,6 +158,81 @@ if (startFeatured < 0 || homepage.slice(0, startFeatured).includes('id="work" cl
   broken.push('Featured Work anchor should be on the section heading');
 }
 
+
+// The code rain must render without JavaScript; motion is only an enhancement.
+for (const filename of allFiles(root).filter((f) => f.endsWith('.html'))) {
+  const html = readFileSync(filename, 'utf8');
+  const sideCount = (html.match(/data-code-side="(?:left|right)"/g) ?? []).length;
+  if (!html.includes('data-code-rain') || sideCount !== 2 ||
+      !html.includes('class="code-rain__static"') ||
+      !html.includes('class="code-rain__trail"')) {
+    broken.push(relative(root, filename) + ': visible code-rain side columns missing');
+  }
+}
+if (!siteStyles.includes('.code-rain__static') ||
+    !siteStyles.includes('.code-rain__trail') ||
+    !siteStyles.includes('code-rain-fall') ||
+    !/prefers-reduced-motion\s*:\s*reduce/.test(siteStyles) ||
+    !/pointer-events\s*:\s*none/.test(siteStyles)) {
+  broken.push('CSS-only code rain, animation or accessibility styles are missing');
+}
+
+
+const documentRainCss = siteStyles.replace(/\/\*[\s\S]*?\*\//g, '');
+if (!/body\s*\{[^}]*position\s*:\s*relative/.test(documentRainCss) ||
+    !/\.code-rain\s*\{[^}]*position\s*:\s*absolute/.test(documentRainCss) ||
+    !/@keyframes\s+code-rain-fall\s*\{[\s\S]*?top\s*:\s*calc\(100%\s*\+\s*30px\)/.test(documentRainCss)) {
+  broken.push('Code rain should span the document and scroll with content, not remain fixed to the viewport');
+}
+
+
+
+// Opening the drawer must highlight the left rain over the dimming backdrop,
+// without intercepting pointer events or covering the drawer on the right.
+const drawerRainCSS = siteStyles.replace(/\/\*[\s\S]*?\*\//g, '');
+for (const rule of [
+  /\.drawer-is-open\s+\.code-rain\s*\{[^}]*z-index\s*:\s*151/,
+  /\.drawer-is-open\s+\.code-rain__side--left\s+\.code-rain__trail\s*\{[^}]*text-shadow\s*:/,
+  /\.drawer-is-open\s+\.code-rain__side--right\s*\{[^}]*visibility\s*:\s*hidden/,
+  /\.drawer-is-open\s+\.code-rain\s*\{[^}]*pointer-events\s*:\s*none/,
+]) {
+  if (!rule.test(drawerRainCSS)) broken.push('Missing drawer-active left code rain styling');
+}
+
+
+// Wider code rain must keep both edge fades gradual and maintain matching column density.
+if (!/\.code-rain__side\s*\{[^}]*width\s*:\s*16vw/.test(siteStyles) ||
+    !/\.code-rain__side\s*\{[^}]*--code-columns\s*:\s*20/.test(siteStyles) ||
+    (siteStyles.match(/(?:mask-image|mask-image):\s*linear-gradient/g) ?? []).length < 2 ||
+    !siteStyles.includes('88%')) {
+  broken.push('Wider edge code rain or gradual fading is missing');
+}
+
+
+
+// Fortune's Gate must use authentic optimized project media, not only an illustration.
+const fortuneHtml = readFileSync(join(root, 'projects/fortunes-gate/index.html'), 'utf8');
+for (const name of [
+  'banner.webp', 'cover.webp', 'gameplay-void-network.webp', 'gameplay-route-planning.webp',
+  'lucky-number-selection.webp', 'advanced-run-settings.webp', 'almanac.webp',
+  'controls.webp', 'keybindings.webp', 'display-settings.webp',
+]) {
+  const relativeAsset = 'media/fortunes-gate/' + name;
+  if (!existsSync(join(root, relativeAsset))) {
+    broken.push('Missing Fortune’s Gate optimized media: ' + name);
+  }
+  if (name !== 'cover.webp' && !fortuneHtml.includes('/preview/' + relativeAsset)) {
+    broken.push('Fortune’s Gate detail media not rendered: ' + name);
+  }
+}
+if (!homepage.includes('/preview/media/fortunes-gate/cover.webp') ||
+    !indexHtml.includes('/preview/media/fortunes-gate/cover.webp')) {
+  broken.push('Fortune’s Gate cover must appear in homepage and project cards');
+}
+if (!fortuneHtml.includes('case-gallery--fortune')) {
+  broken.push('Fortune’s Gate gallery layout is missing');
+}
+
 if (broken.length) {
   throw new Error('Invalid preview output:\n' + broken.join('\n'));
 }

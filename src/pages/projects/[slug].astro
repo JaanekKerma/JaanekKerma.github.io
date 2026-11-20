@@ -44,8 +44,10 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
         <div class="detail-right-marker" aria-hidden="true">PROJECT<br />DETAILS <span>↗</span></div>
       </div>
       <div class="detail-visual">
-        {project.coverImage ? <img class="detail-hero-image" src={sitePath(project.coverImage)} alt={project.coverAlt ?? project.title} decoding="async" /> : <ProjectVisual variant={project.visual} large />}
-        <div class="detail-image-caption"><span>{project.coverImage ? 'PROJECT MEDIA' : 'ILLUSTRATIVE VISUAL STUDY'}</span><span>{project.category === 'game' ? 'GAME DEVELOPMENT' : 'SOFTWARE ENGINEERING'}</span></div>
+        {project.heroImage || project.coverImage
+          ? <img class="detail-hero-image" src={sitePath(project.heroImage ?? project.coverImage!)} alt={project.heroAlt ?? project.coverAlt ?? project.title} decoding="async" fetchpriority="high" />
+          : <ProjectVisual variant={project.visual} large />}
+        <div class="detail-image-caption"><span>{project.heroImage || project.coverImage ? 'PROJECT MEDIA' : 'ILLUSTRATIVE VISUAL STUDY'}</span><span>{project.category === 'game' ? 'GAME DEVELOPMENT' : 'SOFTWARE ENGINEERING'}</span></div>
       </div>
     </header>
 
@@ -111,7 +113,7 @@ const related = projects.filter((item) => item.slug !== project.slug).slice(0, 2
             <span class="section-eyebrow">04 / PROJECT MEDIA</span>
             <h2>Implementation gallery.</h2>
             <p>Screenshots and explanations from the project's development.</p>
-            <div class="case-gallery">
+            <div class:list={['case-gallery', { 'case-gallery--fortune': project.slug === 'fortunes-gate' }]}>
               {project.gallery.map((image) => (
                 <figure class="case-gallery-item">
                   <a href={sitePath(image.url)} target="_blank" rel="noopener noreferrer" aria-label={'Open full image: ' + image.title}>
