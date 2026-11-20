@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CodeRain from '../components/CodeRain.astro';
 import { sitePath } from '../utils/paths';
 import { projects } from '../data/projects';
 
@@ -36,6 +37,7 @@ const isPreview = import.meta.env.BASE_URL.includes('/preview/');
   </head>
   <body>
     {isPreview && <div class="preview-banner" role="note"><strong>DEVELOPMENT PREVIEW</strong><span>Design iteration 01 — not the final portfolio</span></div>}
+    <CodeRain />
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <div class="shell header-inner">
